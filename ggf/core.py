@@ -17,8 +17,10 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     Poisson's ratio of the object.
 
     .. math::
-        
+
        B(\theta) = a (1+\epsilon) (1-\nu*\epsilon) \left[ (1+\epsilon)^2 - \epsilon (1+\nu) (2+\epsilon (1-\nu)) \cos^2 (\theta) \right]^{1/2}
+
+
     
     Parameters
     ----------
@@ -33,7 +35,6 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
         the eccentricity of the prolate spheroid.
     nu: float
         Poisson's ratio of the material.
-    
     """
     x = costheta
     B = a*(1+epsilon) \
@@ -87,8 +88,10 @@ def stress(object_index=1.41,
         refractive index of glass capillary
     geometry: str
         "open" for open setup and "capillary" for glass-capillary (closed) setup
-    
-    
+
+
+    Notes
+    -----
     Example: a stretched spheroidal cell with
     `stretch_ratio`=0.1 and `poisson_ratio`=0.5 has 
     semi-minor axes: b = c = radius (1-poisson_ratio stretch_ratio) = 0.95 radius

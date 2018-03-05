@@ -1,7 +1,7 @@
 .. _section_install:
 
-Installing ggf
-==============
+Installation
+============
 
 ggf is written in pure Python and supports Python version 3.5
 and higher.

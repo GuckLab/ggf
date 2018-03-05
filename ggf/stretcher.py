@@ -1,3 +1,4 @@
+"""Convenience functions for optical stretcher computations"""
 import numpy as np
 
 from .core import stress

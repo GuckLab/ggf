@@ -1,3 +1,4 @@
+"""Other scientific functions"""
 import numpy as np
 
 from .matlab_funcs import legendre

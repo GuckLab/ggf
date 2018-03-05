@@ -1,3 +1,4 @@
+"""Special functions translated from Matlab to Python"""
 import numpy as np
 from scipy import special
 from scipy import integrate

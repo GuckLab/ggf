@@ -9,6 +9,7 @@ optical stretcher.
    :maxdepth: 4
    :caption: Contents:
 
+   installation
    sec_introduction
    sec_theory_notes
    sec_code_reference
