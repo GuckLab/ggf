@@ -18,8 +18,9 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
 
     .. math::
 
-       B(\\theta) = a (1+\\epsilon) (1-\\nu*\\epsilon) \\left[ (1+\\epsilon)^2 - \\epsilon (1+\\nu) (2+\\epsilon (1-\\nu)) \\cos^2 (\\theta) \\right]^{1/2}
-
+       B(\\theta) = a (1+\\epsilon) (1-\\nu \\epsilon)
+       \\left[ (1+\\epsilon)^2 - \\epsilon (1+\\nu)
+       (2+\\epsilon (1-\\nu)) \\cos^2 (\\theta) \\right]^{1/2}
     
     Parameters
     ----------
