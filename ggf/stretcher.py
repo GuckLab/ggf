@@ -50,9 +50,12 @@ def distance_capillary(gel_dist=2e-6, glass_dist=40e-6, medium_dist=40e-6,
 
 
 def semiax_to_radrat(semi_major, semi_minor, poisson_ratio=.45):
-    """
+    """Convert semi-major and semi-minor axes to radius and stretch ratio
+    
+    Notes
+    -----
     Example: a stretched spheroidal cell with
-    `stretch_ratio`=0.1 and `poisson_ratio`=0.5 has 
+    stretch_ratio=0.1 and poisson_ratio=0.5 has 
     semi-minor axes: b = c = radius (1-poisson_ratio stretch_ratio) = 0.95 radius
     semi-major axis:     a = radius (1+stretch_ratio) = 1.10 radius
 

@@ -5,35 +5,80 @@ from scipy import integrate
 
 
 def besselh(n, z):
-    """ Hankel function with k = 1
-        n - real order
-        z - complex argument
+    """Hankel function with k = 1
+    
+    Parameters
+    ----------
+    n: int
+        real order
+    z: float
+        complex argument
+    
+    Notes
+    -----
+    https://de.mathworks.com/help/matlab/ref/besselh.html
     """
     return special.hankel1(n,z)
 
 
 def besselj(n, z):
-    """ Bessel function of first kind
-        n - real order
-        z - complex argument
+    """Bessel function of first kind
+    
+    Parameters
+    ----------
+    n: int
+        real order
+    z: float
+        complex argument
+
+    Notes
+    -----
+    https://de.mathworks.com/help/matlab/ref/besselj.html
     """
     return special.jv(n,z)
 
 
 def gammaln(x):
+    """Logarithm of the absolute value of the Gamma function
+
+    Notes
+    -----
+    https://de.mathworks.com/help/matlab/ref/gammaln.html
+    
+    See Also
+    --------
+    scipy.special.gammaln
+    """
     return special.gammaln(x)
 
 
 def legendre(n, x):
-    """ This function behaves as the the matlab legendre function.
+    """Associated Legendre functions
     
-        x is treated always as a row vector.
-    
-        The statement legendre(2,0:0.1:0.2) returns the matrix
-                x = 0   x = 0.1  x = 0.2
-        m = 0  -0.5000  -0.4850     -0.4400
-        m = 1   0       -0.2985  -0.5879
-        m = 2   3.0000   2.9700  2.8800
+    Parameters
+    ----------
+    n: int
+        degree
+    x: ndarray of floats
+        argument
+
+    Notes
+    -----
+    x is treated always as a row vector
+
+    The statement legendre(2,0:0.1:0.2) returns the matrix
+
+    =======  =======  =======  =======
+    /        x = 0    x = 0.1  x = 0.2
+    =======  =======  =======  =======
+    m = 0    -0.5000  -0.4850  -0.4400
+    m = 1    0        -0.2985  -0.5879
+    m = 2    3.0000   2.9700   2.8800
+    =======  =======  =======  =======
+
+    Notes
+    -----
+    https://de.mathworks.com/help/matlab/ref/legendre.html
     """
     x = np.real_if_close(x).flatten() # flattened
     x = np.array(x, dtype=float) # warning if not real
@@ -46,10 +91,23 @@ def legendre(n, x):
 
 
 def lscov(A, B, w=None):
-    """
-    A*x = B, that is, x minimizes (B - A*x)'*diag(w)*(B - A*x).
+    """Least-squares solution in presence of known covariance
     
-    w typically contains either counts or inverse variances.
+    :math:`A \\cdot x = B`, that is, :math:`x` minimizes
+    :math:`(B - A \\cdot x)^T \\cdot \\text{diag}(w) \\cdot (B - A \\cdot x)`.
+    The matrix :math:`w` typically contains either counts or inverse
+    variances.
+    
+    Parameters
+    ----------
+    A: matrix or 2d ndarray
+        input matrix
+    B: vector or 1d ndarray
+        input vector
+
+    Notes
+    --------
+    https://de.mathworks.com/help/matlab/ref/lscov.html
     """
     # https://stackoverflow.com/questions/27128688/how-to-use-least-squares-with-weight-matrix-in-python
     # https://de.mathworks.com/help/matlab/ref/lscov.html
@@ -68,6 +126,21 @@ def lscov(A, B, w=None):
 
 
 def quadl(func, a, b):
+    """Numerically evaluate integral with scipy QUADPACK quadrature
+
+    Parameters
+    ----------
+    func: callable
+        function to integrate
+    a: float
+        interval start
+    b: float
+        interval end
+
+    Notes
+    -----
+    https://de.mathworks.com/help/matlab/ref/quadl.html
+    """
     wrapreal = lambda x: func(x).real
     wrapimag = lambda x: func(x).imag
     
@@ -80,4 +153,3 @@ def quadl(func, a, b):
                         np.real_if_close(b))[0]
                       
     return rp + 1j*ri
-

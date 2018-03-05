@@ -18,8 +18,7 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
 
     .. math::
 
-       B(\theta) = a (1+\epsilon) (1-\nu*\epsilon) \left[ (1+\epsilon)^2 - \epsilon (1+\nu) (2+\epsilon (1-\nu)) \cos^2 (\theta) \right]^{1/2}
-
+       B(\\theta) = a (1+\\epsilon) (1-\\nu*\\epsilon) \\left[ (1+\\epsilon)^2 - \\epsilon (1+\\nu) (2+\\epsilon (1-\\nu)) \\cos^2 (\\theta) \\right]^{1/2}
 
     
     Parameters
@@ -28,10 +27,10 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
         Cosine of polar coordinates at which to compute the boundary
     a: float
         Equatorial radii of prolate spheroid (semi-minor axis)
-        :math:`b' = c' \equiv a`
+        :math:`b' = c' \\equiv a`
     epsilon: float
         Stretch ratio; defines size of semi-major axis:
-        :math:`a' = (1+\epsilon) a`. Note that this is not
+        :math:`a' = (1+\\epsilon) a`. Note that this is not
         the eccentricity of the prolate spheroid.
     nu: float
         Poisson's ratio of the material.
@@ -76,7 +75,7 @@ def stress(object_index=1.41,
     Parameters
     ----------
     beam_waist: float
-        Gaussian width/ beam waist of fiber [m] (set to infinity for plane wave)
+        Gaussian width or beam waist radius of fiber [m] (set to infinity for plane wave)
     beam_pos: float
         beam waist calculation (i.e. radius at which point intensity has fallen to 1/e**2)
         position from cell center (positive is away from laser, negative towards laser) [m]
@@ -93,7 +92,7 @@ def stress(object_index=1.41,
     Notes
     -----
     Example: a stretched spheroidal cell with
-    `stretch_ratio`=0.1 and `poisson_ratio`=0.5 has 
+    stretch_ratio=0.1 and poisson_ratio=0.5 has 
     semi-minor axes: b = c = radius (1-poisson_ratio stretch_ratio) = 0.95 radius
     semi-major axis:     a = radius (1+stretch_ratio) = 1.10 radius
     where A is the radius of the unstretched, spherical cell
