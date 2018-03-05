@@ -16,6 +16,18 @@ def test_basic():
     assert np.allclose(coeff, coeff_ref)
 
 
+def test_basic_barton():
+    # reference data created with Boyde's Matlab script using default parameters
+    rpath = pathlib.Path(__file__).resolve().parent / "data"
+    th_ref, sigmarr_ref = np.loadtxt(str(rpath / "stress_default_barton.dat"))
+    coeff_ref = np.loadtxt(str(rpath / "coeff_default_barton.dat"))
+    th, sigmarr, coeff = core.stress(field_approx="barton",
+                                     ret_legendre_decomp=True)
+    assert np.allclose(th, th_ref)
+    assert np.allclose(sigmarr, sigmarr_ref)
+    assert np.allclose(coeff, coeff_ref)
+
+
 def test_droplet():
     rpath = pathlib.Path(__file__).resolve().parent / "data"
     coeff_ref = np.loadtxt(str(rpath / "coeff_droplet1.dat"))
@@ -32,12 +44,9 @@ def test_droplet():
     assert np.allclose(coeff, coeff_ref)
 
 
-def test_barton():
+def test_barton_davis_difference():
     th1, sigmarr1 = core.stress(radius=1e-6, field_approx="davis")
     th2, sigmarr2 = core.stress(radius=1e-6, field_approx="barton")
-    
-    # TODO:
-    # verify values from original matlab script
     assert np.allclose(sigmarr1, sigmarr2, rtol=0, atol=3e-4)
 
 

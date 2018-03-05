@@ -47,4 +47,4 @@ The coefficients ``coeff`` can be converted via
     GGF = coeff2ggf(coeff, poisson_ratio=.45)
 
 These methods produce the same output as the original Matlab scripts
-with an accuracy of about :math:`10^{-8}`.
+with a floating point accuracy of about :math:`10^{-8}`.
