@@ -54,48 +54,61 @@ def get_hgc():
     return hgc
 
 
-def stress(object_index=1.41,
-           medium_index=1.3465,
-           radius=2.8466e-6,  # [m]
-           poisson_ratio=0.45,
-           stretch_ratio=0.1,
-           wavelength=780e-9,  # [m]
-           beam_waist=3,  # [wavelengths]
-           power_left=.6,  # [W]
-           power_right=.6,  # [W]
-           dist = 100e-6, #[m]
-           numpoints=100,
-           theta_max=np.pi,
-           field_approx="davis",
-           ret_legendre_decomp=False,
-           verbose=False,
-           ):
+def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
+           radius=2.8466e-6, stretch_ratio=0.1, wavelength=780e-9,
+           beam_waist=3, power_left=.6, power_right=.6, dist=100e-6,
+           numpoints=100, theta_max=np.pi, field_approx="davis",
+           ret_legendre_decomp=False, verbose=False):
     """Compute the stress acting on a prolate spheroid
     
     Parameters
     ----------
+    object_index: float
+        Refractive index of the spheroid
+    medium_index: float
+        Refractive index of the surrounding medium
+    poisson_ratio: float
+        Poisson's ratio of the spheroid material
+    radius: float
+        TODO
+    stretch_ratio: float
+        TODO
+    wavelength: float
+        Wavelenth of the gaussian beam [m]
     beam_waist: float
-        Gaussian width or beam waist radius of fiber [m] (set to infinity for plane wave)
-    beam_pos: float
-        beam waist calculation (i.e. radius at which point intensity has fallen to 1/e**2)
-        position from cell center (positive is away from laser, negative towards laser) [m]
-    d_os:
-        open setup only, distance between laser to cell center [m] (set to zero for plane wave)
-    gel_index: float
-        refractive index of index matching gel
-    glass_index: float
-        refractive index of glass capillary
-    geometry: str
-        "open" for open setup and "capillary" for glass-capillary (closed) setup
+        Beam waist radius of the gaussian beam [wavelengths]
+    power_left: float
+        Laser power of the left beam [W]
+    power_right: float
+        Laser power of the right beam [W]
+    dist: float
+        Distance between beam waist and object center [m]
+    numpoints: int
+        Number of points to compute stresses for
+    theta_max: float
+        Maximum angle to compute stressed for
+    field_approx: str
+        TODO
+    ret_legendre_decomp: bool
+        If True, return coefficients of decomposition of stress
+        into Legendre polynomials
+    verbose: int
+        Increase verbosity
 
+    Returns
+    -------
+    theta: 1d ndarray
+        Angles for which stresses are computed
+    sigma_rr: 1d ndarray
+        Radial stress corresponding to angles
+    coeff: 1d ndarray
+        If `ret_legendre_decomp` is True, return compositions
+        of decomposition of stress into Legendre polynomials.
 
     Notes
     -----
-    Example: a stretched spheroidal cell with
-    stretch_ratio=0.1 and poisson_ratio=0.5 has 
-    semi-minor axes: b = c = radius (1-poisson_ratio stretch_ratio) = 0.95 radius
-    semi-major axis:     a = radius (1+stretch_ratio) = 1.10 radius
-    where A is the radius of the unstretched, spherical cell
+    The angles `theta` are computed on a grid that does not
+    include zero and `theta_max`.
     """
     if field_approx not in ["davis", "barton"]:
         raise ValueError("`field_approx` must be 'davis' or 'barton'")
