@@ -8,3 +8,5 @@ Code examples
 
 .. fancy_include:: stress_reproduced.py
 
+.. fancy_include:: stress_decomposition.py
+
