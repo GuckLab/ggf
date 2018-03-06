@@ -33,12 +33,12 @@ plt.figure(figsize=(8, 4))
 
 ax1 = plt.subplot(121, projection="polar")
 for ep, bi in zip(eps, b1s):
-    ax1.plot(theta, bi, label="epsilon={:.2f}, nu=0".format(ep))
+    ax1.plot(theta, bi, label="ϵ={:.2f}, ν=0".format(ep))
 ax1.legend()
 
 ax2 = plt.subplot(122, projection="polar")
 for nu, bi in zip(nus, b2s):
-    ax2.plot(theta, bi, label="epsilon=.1, nu={:.1f}".format(nu))
+    ax2.plot(theta, bi, label="ϵ=.1, ν={:.1f}".format(nu))
 ax2.legend()
 
 plt.tight_layout()
