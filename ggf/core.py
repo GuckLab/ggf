@@ -25,16 +25,23 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     Parameters
     ----------
     costheta: float or np.ndarray
-        Cosine of polar coordinates at which to compute the boundary
+        Cosine of polar coordinates :math:`\\theta`
+        at which to compute the boundary.
     a: float
         Equatorial radii of prolate spheroid (semi-minor axis)
-        :math:`b' = c' \\equiv a`
+        :math:`b' = c' \\equiv a`.
     epsilon: float
         Stretch ratio; defines size of semi-major axis:
         :math:`a' = (1+\\epsilon) a`. Note that this is not
         the eccentricity of the prolate spheroid.
     nu: float
-        Poisson's ratio of the material.
+        Poisson's ratio :math:`\\nu` of the material.
+    
+    Returns
+    -------
+    B: 1d ndarray
+        Radial object boundary in dependence of theta
+        :math:`B(\\theta)`.
     """
     x = costheta
     B = a*(1+epsilon) \
@@ -45,7 +52,7 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
 
 @lru_cache(maxsize=32)
 def get_hgc():
-    """Load hypergeometric coefficients from hypergeomdata2.dat
+    """Load hypergeometric coefficients from *hypergeomdata2.dat*.
 
     These coefficients were computed by Lars Boyde
     using Wolfram Mathematica.

@@ -12,8 +12,8 @@ optical stretcher.
    installation
    sec_introduction
    sec_theory_notes
-   sec_code_reference
    sec_examples
+   sec_code_reference
    sec_changelog
    z_bib
 
