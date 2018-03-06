@@ -6,9 +6,9 @@ Introduction
   :maxdepth: 2
 
 
-What is ggf?
-------------
-This package is a Python implementation of two Matlab scripts by
+What is the package "ggf" used for?
+-----------------------------------
+It is a Python implementation of two Matlab scripts by
 Lars Boyde, *StretcherNStress.m* and *GGF.m*, which are used in
 the Guck lab to compute optical stress distributions and resulting
 global geometric factors for spherical and spheroidal objects
@@ -38,7 +38,7 @@ You can access the computations performed in *StretcherNStress.m* via
                                  field_approx="davis",
                                  ret_legendre_decomp=True)
 
-The coefficients ``coeff`` can be converted via
+The GGF can be computed from the coefficients ``coeff`` via
 :func:`ggf.globgeomfact.coeff2ggf`.
 
 .. code::
@@ -47,4 +47,4 @@ The coefficients ``coeff`` can be converted via
     GGF = coeff2ggf(coeff, poisson_ratio=.45)
 
 These methods produce the same output as the original Matlab scripts
-with a floating point accuracy of about :math:`10^{-8}`.
+with an accuracy that is below the standard tolerance of :func:`numpy.allclose`.

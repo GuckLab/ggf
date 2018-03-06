@@ -2,7 +2,7 @@ ggf documentation
 =================
 
 ggf is a Python library for computing global geometric factors and
-corresponding stresses experienced by dielectric objects in the
+corresponding stresses acting on dielectric objects in the
 optical stretcher.
 
 .. toctree::

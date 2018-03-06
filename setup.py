@@ -6,7 +6,7 @@ import sys
 
 
 author = u"Paul Müller"
-authors = [author]
+authors = [author, "Gheorghe Cojoc"]
 description = 'global geometric factors and corresponding stresses of the optical stretcher '
 name = 'ggf'
 year = "2018"
@@ -23,6 +23,7 @@ if __name__ == "__main__":
         version=version,
         packages=find_packages(),
         package_dir={name: name},
+        include_package_data=True,
         license="MIT",
         description=description,
         long_description=open('README.rst').read() if exists('README.rst') else '',
