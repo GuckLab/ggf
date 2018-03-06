@@ -10,3 +10,4 @@ Code examples
 
 .. fancy_include:: stress_decomposition.py
 
+.. fancy_include:: boundary.py
