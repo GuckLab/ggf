@@ -2,7 +2,8 @@
 
 This example illustrates how the parameters Poisson's ratio
 :math:`\nu` and stretch ratio :math:`\epsilon` influence
-the object boundary used in :func:`ggf.core.stress`.
+the object boundary used in :func:`ggf.core.stress` and
+defined in :func:`ggf.core.boundary`.
 """
 import numpy as np
 import matplotlib.pylab as plt
