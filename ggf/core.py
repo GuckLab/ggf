@@ -20,7 +20,7 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
 
        B(\\theta) = a (1+\\epsilon) (1-\\nu \\epsilon)
        \\left[ (1+\\epsilon)^2 - \\epsilon (1+\\nu)
-       (2+\\epsilon (1-\\nu)) \\cos^2 (\\theta) \\right]^{1/2}
+       (2+\\epsilon (1-\\nu)) \\cos^2 \\theta \\right]^{-1/2}
     
     Parameters
     ----------
@@ -42,6 +42,11 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     B: 1d ndarray
         Radial object boundary in dependence of theta
         :math:`B(\\theta)`.
+
+    Notes
+    -----
+    For :math:`\\nu=0`, the above equation becomes
+    equation (4) in :cite:`Boyde2009`.
     """
     x = costheta
     B = a*(1+epsilon) \
@@ -68,7 +73,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
            numpoints=100, theta_max=np.pi, field_approx="davis",
            ret_legendre_decomp=False, verbose=False):
     """Compute the stress acting on a prolate spheroid
-    
+
     Parameters
     ----------
     object_index: float
@@ -115,8 +120,9 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
 
     Notes
     -----
-    The angles `theta` are computed on a grid that does not
-    include zero and `theta_max`.
+    - The angles `theta` are computed on a grid that does not
+      include zero and `theta_max`.
+    - This implementation was first presented in :cite:`Boyde2009`.
     """
     if field_approx not in ["davis", "barton"]:
         raise ValueError("`field_approx` must be 'davis' or 'barton'")

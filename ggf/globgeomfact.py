@@ -8,8 +8,12 @@ from .stretcher import stress_capillary, stress_open
 def coeff2ggf(coeff, poisson_ratio=.45):
     """Compute the global geometric factor from stress coefficients
 
-    The geometric factor calculated already include the peak stress.
-    You don't need to divide by the peak stress anymore.
+    The original Matlab script states that the computed GGF
+    already includes the peak stress:
+
+    .. math::
+        
+        \text{GGF} = \sigma_0 F_\text{G}.
     """
     ## Parameters used in the program
     
