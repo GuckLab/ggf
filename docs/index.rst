@@ -1,7 +1,7 @@
+.. _index:
+
 ggf documentation
 =================
-
-.. _index:
 
 ggf is a Python library for computing global geometric factors and
 corresponding stresses acting on dielectric objects in the
