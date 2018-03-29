@@ -13,7 +13,7 @@ def coeff2ggf(coeff, poisson_ratio=.45):
 
     .. math::
         
-        \text{GGF} = \sigma_0 F_\text{G}.
+        \\text{GGF} = \\sigma_0 F_\\text{G}.
     """
     ## Parameters used in the program
     
