@@ -1,6 +1,9 @@
 """GGF as a function of beam waist radius
 
-This example attempts and fails to reproduce figure 7 in :cite:`Bellini2012`.
+Note: This example is not reproducing a previously published figure, which
+could be due to false simulation parameters.
+
+This example attempts reproduce figure 7 in :cite:`Bellini2012`.
 Two implementations of the optical stretcher are described, the assembled
 optical stretcher (AOS) and the monolithic optical stretcher (MOS).
 In the publication, these have two different mode field diameters (MFD),
