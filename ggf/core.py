@@ -13,7 +13,7 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     """Projected boundary of a prolate spheroid
     
     Compute the boundary according to equation (4) in
-    :cite:`Boyde2009` with the addition to of the
+    :cite:`Boyde2009` with the addition of the
     Poisson's ratio of the object.
 
     .. math::
