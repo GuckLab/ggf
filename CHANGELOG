@@ -1,2 +1,4 @@
+0.1.1
+ - globgeomfact.coeff2ggf returned complex instead of float
 0.1.0
  - initial version

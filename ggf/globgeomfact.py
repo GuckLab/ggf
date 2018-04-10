@@ -64,14 +64,14 @@ def coeff2ggf(coeff, poisson_ratio=.45):
     Mat1=Mat
     sol=lscov(Mat1,Sigmatot)
     
-    PL = np.zeros(n+1, dtype=complex)
-    w0 = np.zeros(n+1, dtype=complex)
+    PL = np.zeros(n+1, dtype=float)
+    w0 = np.zeros(n+1, dtype=float)
 
     ##  Calculation of the Global Geometrical Factor including sigma0
     ww=0
     for k in range(0,n):
         PLA=legendre(k,np.cos(Theta1))
-        PL[k]=PLA[0][0] # legendre polynomial with m=0!
+        PL[k]=np.real_if_close(PLA[0][0]) # legendre polynomial with m=0!
         w0[k]=((sol[k])*(r**(k+1))*(k+1 )*(k-2 +4*Nu) +(sol[n+k+1])*r**(k-1)*k)*PL[k]
         ww=ww+w0[k]
 
