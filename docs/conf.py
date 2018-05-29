@@ -81,6 +81,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'ggf'
+github_project = 'GuckLab/' + project
 copyright = '2017, Paul Müller'
 author = 'Paul Müller'
 
