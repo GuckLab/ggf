@@ -9,7 +9,7 @@ Theory Notes
 Optical stretcher
 -----------------
 The optical stretcher consists of a dual beam laser trap, in its original
-configuration built from to opposing optical fibers :cite:`Guck2001`.
+configuration built from two opposing optical fibers :cite:`Guck2001`.
 When increasing the trapping power, compliant objects such as cells
 are stretched along the axis of the trap. Using video analysis, the
 measured shape change can be translated into physical properties of the
