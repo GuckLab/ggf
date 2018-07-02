@@ -8,9 +8,9 @@ Concept and theory
 
 Summary
 =======
-The computation of the compliance for elastic spheres in the OS can be
-divided into three main tasks: measuring the deformation, 
-modeling the optical stress, and computing the GGF from the stress.
+The computation of the compliance :math:`J` for elastic spheres in the OS can be
+divided into three main tasks: measuring the deformation :math:`w`, 
+modeling the optical stress :math:`\sigma_r`, and computing the GGF from the stress.
 Several approaches to these problems have been presented in the
 related literature and are discussed in the following.
 
@@ -40,13 +40,13 @@ pointing to the right hand fiber.
 :math:`cos^2\theta` approximation
 ---------------------------------
 Ray optics is used to compute the optical stress acting on a prolate
-spheroid and a :math:`\sigma_p cos^2\theta` model is fitted to the
+spheroid and a :math:`\sigma_0 cos^2\theta` model is fitted to the
 resulting stress profile with the peak stress
-:math:`\sigma_p` :cite:`Guck2001`. The :math:`\sigma_p cos^2\theta`
+:math:`\sigma_0` :cite:`Guck2001`. The :math:`\sigma_0 cos^2\theta`
 approximation simplifies subsequent computations. 
 
-Note that a more general model :math:`\sigma_p cos^n\theta` with
-larger exponents (e.g. :math:`n` = 4 ... 24) can also be applied,
+Note that a more general model :math:`\sigma_0 cos^2n\theta` with
+larger exponents (e.g. :math:`n` = 2,3,4,...) can also be applied,
 e.g. for different fibroblast cell lines :cite:`Ananthakrishnan2006`. 
 
 
@@ -104,12 +104,13 @@ connected via a Legendre decomposition according to
 
 with the Legendre polynomials :math:`P_n` and the Poisson's ratio :math:`\nu`.
 The coefficients :math:`A_n` and :math:`B_n` have to be determined from
-boundary conditions. For the case of normal loading
+boundary conditions. For the case of normal loading, which is given by
+the electromagnetic boundary conditions in the OS,
 (:math:`\sigma_\theta=\tau_{r,\theta}=0`), these coefficients compute to:
 
 .. math::
 
-    A_0 = - \frac{\sigma_0}{4G(1+\nu)}
+    A_0 = - \frac{s_0}{4G(1+\nu)}
     
     B_0 = A_1 = B_1 = 0
 
@@ -117,27 +118,27 @@ and for :math:`n>=2`:
 
 .. math::
 
-    A_n &= - \frac{\sigma_n}{4Gr_0^n \Delta}
+    A_n &= - \frac{s_n}{4Gr_0^n \Delta}
 
-    B_n &= \frac{\sigma_n}{4Gr_0^{n-2} \Delta} \cdot \frac{n^2 + 2n -1 + 2\nu}{n-1}
+    B_n &= \frac{s_n}{4Gr_0^{n-2} \Delta} \cdot \frac{n^2 + 2n -1 + 2\nu}{n-1}
 
   \text{with }  \Delta &= n(n-1) + (2n+1) (\nu + 1)
 
-Where :math:`\sigma_n` is the :math:`n\text{th}` component of the Legendre
+Where :math:`s_n` is the :math:`n\text{th}` component of the Legendre
 decomposition of :math:`\sigma_r`
 
 .. math::
 
-    \sigma_r(\theta) = \sum_n \sigma_n P_n(\cos \theta).
+    \sigma_r(\theta) = \sum_n s_n P_n(\cos \theta).
 
 The radial displacement then takes the form
 
 .. math::
 
     u_r(r, \theta) = \frac{r_0}{G} \left[
-                     \frac{(1-2\nu) \sigma_0}{2(1+\nu)} +
+                     \frac{(1-2\nu) s_0}{2(1+\nu)} +
                      \sum_{n=2}^\infty
-                     \frac{2\sigma_n}{2n+1}
+                     \frac{2s_n}{2n+1}
                      \left(L_n \left(\frac{r}{r_0}\right)^n + 
                            M_n \left(\frac{r}{r_0}\right)^{n-2} \right)
                      P_n(\cos \theta)
@@ -156,9 +157,9 @@ To obtain the GGF, we finally compute
     GGF &= \frac{G}{r_0} u_r(r_0, 0)
 
         &= \left[
-           \frac{(1-2\nu) \sigma_0}{2(1+\nu)} +
+           \frac{(1-2\nu) s_0}{2(1+\nu)} +
            \sum_{n=2}^\infty
-           \frac{2\sigma_n}{2n+1}
+           \frac{2s_n}{2n+1}
            \left(L_n + M_n \right)
            P_n(\cos \theta)
            \right].
@@ -168,7 +169,11 @@ Notes:
 
 - Due to the fact hat the stress profile in the OS is rotationally
   symmetric w.r.t. the stretcher axis, all odd coefficients
-  :math:`\sigma_n` are zero.
+  :math:`s_n` are zero.
+
+- The polar displacement :math:`u_\theta` has been omitted here,
+  because it does not represent a quantity measurable in an OS
+  experiment.
 
 
 Special case: :math:`cos^2\theta` approximation
@@ -177,25 +182,25 @@ Following the above approach, the stress profile
 
 .. math::
 
-    \sigma_r(\theta) = \sigma_p \cos^2\theta
+    \sigma_r(\theta) = \sigma_0 \cos^2\theta
 
-with the peak stress :math:`\sigma_p` can be decomposed into
+with the peak stress :math:`\sigma_0` can be decomposed into
 two Legendre polynomials
 
 .. math:: 
 
-    \sigma_r(\theta) &= \sigma_0 P_0(\cos\theta) + \sigma_2 P_2(\cos\theta)
+    \sigma_r(\theta) &= s_0 P_0(\cos\theta) + s_2 P_2(\cos\theta)
 
-    \sigma_0 &= \frac{1}{3} \sigma_p
+    s_0 &= \frac{1}{3} \sigma_0
 
-    \sigma_2 &= \frac{2}{3} \sigma_p
+    s_2 &= \frac{2}{3} \sigma_0
 
 Inserting these Legendre coefficients in the above equation for the
 GGF yields
 
 .. math::
 
-   GGF = \frac{\sigma_p}{2(1+\nu)} \left[
+   GGF = \frac{\sigma_0}{2(1+\nu)} \left[
          \frac{1}{3} \left( (1-2\nu) + \frac{(-7 + 4\nu)(1+\nu)}{7+5\nu} \right)
          + \frac{(7-4\nu)(1+\nu)}{7+5\nu} \cos^2\theta \right].
    
@@ -204,11 +209,11 @@ was written in the form
 
 .. math::
     
-    \frac{w}{r_0} = \frac{\sigma_p F_\text{G}}{G}
+    \frac{w}{r_0} = \frac{\sigma_0 F_\text{G}}{G}
 
 with the geometrical factor :math:`F_\text{G}` that does not include
-the peak stress :math:`\sigma_p`. Hence the term "global geometrical factor"
-:math:`\text{GGF} = \sigma_p F_\text{G}`.
+the peak stress :math:`\sigma_0`. Hence the term "global geometrical factor"
+:math:`\text{GGF} = \sigma_0 F_\text{G}`.
 
 
 Computation of compliance
