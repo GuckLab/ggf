@@ -1,19 +1,33 @@
 """Computation of the global geometric factor"""
 import numpy as np
 
-from .matlab_funcs import lscov, legendre
+from ...matlab_funcs import lscov, legendre
 from .stretcher import stress_capillary, stress_open
 
 
 def coeff2ggf(coeff, poisson_ratio=.45):
     """Compute the global geometric factor from stress coefficients
 
-    The original Matlab script states that the computed GGF
-    already includes the peak stress:
+    The radial displacements of an elastic sphere can be expressed in
+    terms of Legendre polynomials (see :cite:`Lure1964` equation 6.2.9)
+    whose coefficients are computed from the Legendre decomposition of
+    the radial stress.
 
-    .. math::
+    Notes
+    -----
+    
+    - For a :math:`\\sigma_0 \cos^n(\\theta)` stress profile,
+      the GGF already includes the peak stress according to:
+
+      .. math::
         
-        \\text{GGF} = \\sigma_0 F_\\text{G}.
+          \\text{GGF} = \\sigma_0 F_\\text{G}.
+
+    - This is a conversion of the Matlab script GGF.m to Python. The
+      code solves a linear system of equations to determine all
+      Legendre coefficients. The new implementation in
+      :func:`ggf.core.legendre2ggf` uses the direct solution and
+      thus should be preferred.
     """
     ## Parameters used in the program
     

@@ -8,7 +8,7 @@ import matplotlib.pylab as plt
 import numpy as np
 import percache
 
-from ggf.core import stress
+from ggf.stress.boyde2009 import stress
 
 
 @percache.Cache("stress_reproduced.cache", livesync=True)

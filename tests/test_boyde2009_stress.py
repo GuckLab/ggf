@@ -2,7 +2,7 @@ import pathlib
 
 import numpy as np
 
-from ggf import core
+from ggf.stress.boyde2009 import core
 
 
 def test_basic():

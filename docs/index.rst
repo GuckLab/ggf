@@ -12,13 +12,13 @@ version |release|.
    :maxdepth: 4
    :caption: Contents:
 
-   installation
+   sec_installation
    sec_introduction
-   sec_theory_notes
+   sec_concept_theory
    sec_examples
    sec_code_reference
    sec_changelog
-   z_bib
+   sec_z_bib
 
 
 Indices and tables

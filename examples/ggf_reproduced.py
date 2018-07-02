@@ -21,9 +21,9 @@ import matplotlib.pylab as plt
 import numpy as np
 import percache
 
-from ggf.core import stress
-from ggf.globgeomfact import coeff2ggf
-from ggf.stretcher import distance_capillary
+from ggf.stress.boyde2009 import stress
+from ggf import legendre2ggf
+from ggf.stress.boyde2009.stretcher import distance_capillary
 
 medium_index = 1.338
 
@@ -66,7 +66,7 @@ kwargs_mos.update({"beam_waist": 3,
 @percache.Cache("ggf_reproduced.cache", livesync=True)
 def compute_ggf(**kw):
     coeff = stress(ret_legendre_decomp=True, **kw)[0]
-    return coeff2ggf(coeff, poisson_ratio=kw["poisson_ratio"])
+    return legendre2ggf(coeff, poisson_ratio=kw["poisson_ratio"])
 
 
 aos_ggf = []

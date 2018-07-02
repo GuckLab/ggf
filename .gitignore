@@ -102,3 +102,7 @@ ENV/
 
 _version_save.py
 examples/*.cache
+.pytest_cache/
+docs/ggf.bib.bak
+docs/ggf.bib.sav
+

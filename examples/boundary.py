@@ -8,7 +8,7 @@ defined in :func:`ggf.core.boundary`.
 import numpy as np
 import matplotlib.pylab as plt
 
-from ggf.core import boundary
+from ggf.stress.boyde2009 import boundary
 
 theta = np.linspace(0, 2*np.pi, 300)
 costheta = np.cos(theta)
