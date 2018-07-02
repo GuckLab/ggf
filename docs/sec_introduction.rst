@@ -74,7 +74,7 @@ The GGF can be computed from the coefficients ``coeff`` via
 .. code::
 
     from ggf import legendre2ggf
-    GGF = coeff2ggf(coeff, poisson_ratio=.45)
+    GGF = legendre2ggf(coeff, poisson_ratio=.45)
 
 These methods produce the same output as the original Matlab scripts
 with an accuracy that is below the standard tolerance of :func:`numpy.allclose`.

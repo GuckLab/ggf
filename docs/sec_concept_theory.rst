@@ -11,8 +11,8 @@ Summary
 The computation of the compliance for elastic spheres in the OS can be
 divided into three main tasks: measuring the deformation, 
 modeling the optical stress, and computing the GGF from the stress.
-Several approaches to these problems have been presented in literature
-and are discussed in the following.
+Several approaches to these problems have been presented in the
+related literature and are discussed in the following.
 
 
 Experimentally quantifying deformation
@@ -40,12 +40,12 @@ pointing to the right hand fiber.
 :math:`cos^2\theta` approximation
 ---------------------------------
 Ray optics is used to compute the optical stress acting on a prolate
-spheroid and a :math:`\sigma_0 cos^2\theta` model is fitted to the
+spheroid and a :math:`\sigma_p cos^2\theta` model is fitted to the
 resulting stress profile with the peak stress
-:math:`\sigma_0` :cite:`Guck2001`. The :math:`\sigma_0 cos^2\theta`
+:math:`\sigma_p` :cite:`Guck2001`. The :math:`\sigma_p cos^2\theta`
 approximation simplifies subsequent computations. 
 
-Note that a more general model :math:`\sigma_0 cos^n\theta` with
+Note that a more general model :math:`\sigma_p cos^n\theta` with
 larger exponents (e.g. :math:`n` = 4 ... 24) can also be applied,
 e.g. for different fibroblast cell lines :cite:`Ananthakrishnan2006`. 
 
@@ -90,7 +90,7 @@ the stretcher axis.
 The GGF can be computed from the radial stress :math:`\sigma_r(\theta)`
 via the radial displacement :math:`u_r(r, \theta)`. These quantities can be
 connected via a Legendre decomposition according to
-(:cite:`Lure1964` chapter 6)
+(:cite:`Lure1964`, chapter 6)
 
 .. math::
 
@@ -121,7 +121,7 @@ and for :math:`n>=2`:
 
     B_n &= \frac{\sigma_n}{4Gr_0^{n-2} \Delta} \cdot \frac{n^2 + 2n -1 + 2\nu}{n-1}
 
-    \Delta &= n(n-1) + (2n+1) (\nu + 1)
+  \text{with }  \Delta &= n(n-1) + (2n+1) (\nu + 1)
 
 Where :math:`\sigma_n` is the :math:`n\text{th}` component of the Legendre
 decomposition of :math:`\sigma_r`
@@ -144,9 +144,9 @@ The radial displacement then takes the form
                      \right]
 
 with the coefficients :math:`L_n` and :math:`M_n` given in 
-:cite:`Lure1964` chapter 6.6.
+:cite:`Lure1964`, chapter 6.6.
 We measure the displacement at the outer perimeter of the stretched object
-and on the stretcher axis only; Thus we set :math:`r=r_0` and
+and on the stretcher axis only; Thus, we set :math:`r=r_0` and
 :math:`\theta=0` with :math:`w=u_r(r_0, 0)`.
 
 To obtain the GGF, we finally compute
@@ -161,9 +161,7 @@ To obtain the GGF, we finally compute
            \frac{2\sigma_n}{2n+1}
            \left(L_n + M_n \right)
            P_n(\cos \theta)
-           \right]
-
-where :math:`G/r_0` cancels out in the above equation.
+           \right].
 
 
 Notes:
@@ -201,7 +199,8 @@ GGF yields
          \frac{1}{3} \left( (1-2\nu) + \frac{(-7 + 4\nu)(1+\nu)}{7+5\nu} \right)
          + \frac{(7-4\nu)(1+\nu)}{7+5\nu} \cos^2\theta \right].
    
-Historically, the relation between strain and was written in the form
+Historically, the relation between strain, stress, and shear modulus
+was written in the form
 
 .. math::
     
@@ -212,6 +211,6 @@ the peak stress :math:`\sigma_p`. Hence the term "global geometrical factor"
 :math:`\text{GGF} = \sigma_p F_\text{G}`.
 
 
-
 Computation of compliance
 =========================
+todo
