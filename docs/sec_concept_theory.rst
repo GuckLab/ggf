@@ -105,7 +105,7 @@ connected via a Legendre decomposition according to
 with the Legendre polynomials :math:`P_n` and the Poisson's ratio :math:`\nu`.
 The coefficients :math:`A_n` and :math:`B_n` have to be determined from
 boundary conditions. For the case of normal loading, which is given by
-the electromagnetic boundary conditions in the OS,
+the electromagnetic boundary conditions in the OS
 (:math:`\sigma_\theta=\tau_{r,\theta}=0`), these coefficients compute to:
 
 .. math::
@@ -154,7 +154,7 @@ To obtain the GGF, we finally compute
 
 .. math::
 
-    GGF &= \frac{G}{r_0} u_r(r_0, 0)
+    \text{GGF} &= \frac{G}{r_0} u_r(r_0, 0)
 
         &= \left[
            \frac{(1-2\nu) s_0}{2(1+\nu)} +
@@ -200,7 +200,7 @@ GGF yields
 
 .. math::
 
-   GGF = \frac{\sigma_0}{2(1+\nu)} \left[
+   \text{GGF} = \frac{\sigma_0}{2(1+\nu)} \left[
          \frac{1}{3} \left( (1-2\nu) + \frac{(-7 + 4\nu)(1+\nu)}{7+5\nu} \right)
          + \frac{(7-4\nu)(1+\nu)}{7+5\nu} \cos^2\theta \right].
    
@@ -218,4 +218,13 @@ the peak stress :math:`\sigma_0`. Hence the term "global geometrical factor"
 
 Computation of compliance
 =========================
-todo
+A typical OS experiment records the deformation :math:`w(t)` over time
+:math:`t`. The quantity of interest is the (creep) compliance :math:`J(t)`.
+With :math:`J = 1/G`, it computes to
+
+.. math::
+
+    J(t) = \frac{w(t)}{r_0} \cdot \frac{1}{\text{GGF}(t)}. 
+
+Note that the GGF is now time-dependent, because the optical stress
+profile :math:`\sigma_r`, from which the GGF is computed, also depends on the deformation. 
