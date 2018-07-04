@@ -34,8 +34,7 @@ def test_droplet():
     semi_major = 4.62469e-6
     semi_minor = 4.589914e-6
     # We take the average of the two to compute the stress.
-    # This is wrong. In practice one should use
-    # ggf.stretcher.semiax_to_radrat instead!
+    # This is wrong.
     radius = (semi_major + semi_minor) / 2
     th, sigmarr, coeff = core.stress(radius=radius,
                                      object_index=1.41,

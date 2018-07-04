@@ -6,7 +6,7 @@ import numpy as np
 
 from ...matlab_funcs import besselh, besselj, gammaln, lscov, quadl
 from ...sci_funcs import legendrePlm
-
+from ...core import stress2legendre
 
 
 def boundary(costheta, a=1, epsilon=.1, nu=0):
@@ -918,31 +918,8 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
     res = [th, sigma]
     
     if ret_legendre_decomp:
-        coeff = stress_legendre_decomp(th=th,
-                                       sigmarr=sigma,
-                                       n_poly=lmax)
+        coeff = stress2legendre(stress=sigma, theta=th, n_poly=lmax)
         res.append(coeff)
 
     return res
 
-
-def stress_legendre_decomp(th, sigmarr, n_poly):
-    """Decompose stress into Legendre Polynomials"""
-    # Sigma = Sum_n [Coeff(n) P_n(np.cos(theta))]
-    nmax = n_poly                    # number of Legendre polynomials used in fit
-
-    # transfer data from stress plot into pair of corresponding variables
-    # [Theta,Sigma]
-    numpoints = th.shape[0]
-    theta = th.reshape(-1, 1)
-    sigma = sigmarr.reshape(-1, 1)
-
-    # Write set of linear equations for stresses in terms Legendre functions
-    legmat = np.zeros((numpoints,nmax), dtype=float)
-    for ii in range(numpoints):
-        for jj in np.arange(nmax)[::2]: # skip odd Legendre Polynomials since stress is an even function (symmetrical)
-            legmat[ii, jj] = np.real_if_close(legendrePlm(0, jj, np.cos(theta[ii])))
-
-    coeff = lscov(legmat, sigma)
-
-    return coeff
