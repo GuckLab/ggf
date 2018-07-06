@@ -30,13 +30,13 @@ def fiber_distance_capillary(gel_thickness=2e-6, glass_thickness=40e-6,
     Returns
     -------
     eff_dist: float
-        Effective distance between fiber the fibers
+        Effective distance between the fibers
 
     Notes
     -----
     The effective distance is computed relative to the medium,
     i.e. if `gel_index` == `glass_index` == `medium_index`, then
-    `eff_dist` = `gel_dist` + `glass_dist` + `medium_dist`.
+    `eff_dist` = 2*`gel_dist` + 2*`glass_dist` + `channel_width`.
     """
     eff_dist = 2 * medium_index / gel_index * gel_thickness \
                + 2 * medium_index / glass_index * glass_thickness \

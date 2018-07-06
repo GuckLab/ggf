@@ -37,7 +37,7 @@ imaging plane in a typical OS experiment, with :math:`\theta=0`
 pointing to the right hand fiber.
 
 
-:math:`cos^2\theta` approximation
+:math:`\cos^2\theta` approximation
 ---------------------------------
 Ray optics is used to compute the optical stress acting on a prolate
 spheroid and a :math:`\sigma_0 cos^2\theta` model is fitted to the
@@ -176,7 +176,7 @@ Notes:
   experiment.
 
 
-Special case: :math:`cos^2\theta` approximation
+Special case: :math:`\cos^2\theta` approximation
 -------------------------------------------------
 Following the above approach, the stress profile
 

@@ -6,7 +6,14 @@ Code examples
   :maxdepth: 2
 
 
+Applications
+============
+
 .. fancy_include:: creep_compliance.py
+
+
+Reproduction tests
+==================
 
 .. fancy_include:: stress_reproduced.py
 
