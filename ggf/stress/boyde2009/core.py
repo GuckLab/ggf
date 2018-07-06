@@ -50,8 +50,9 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     """
     x = costheta
     B = a*(1+epsilon) \
-        * (1-nu*epsilon) \
         / ((1+epsilon)**2 - epsilon*(1+nu)*(2+epsilon*(1-nu))*x**2)**.5
+    B *= (1-nu*epsilon)
+
     return B
 
 
@@ -70,7 +71,7 @@ def get_hgc():
 def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
            radius=2.8466e-6, stretch_ratio=0.1, wavelength=780e-9,
            beam_waist=3, power_left=.6, power_right=.6, dist=100e-6,
-           numpoints=100, theta_max=np.pi, field_approx="davis",
+           n_points=100, theta_max=np.pi, field_approx="davis",
            ret_legendre_decomp=False, verbose=False):
     """Compute the stress acting on a prolate spheroid
 
@@ -96,7 +97,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
         Laser power of the right beam [W]
     dist: float
         Distance between beam waist and object center [m]
-    numpoints: int
+    n_points: int
         Number of points to compute stresses for
     theta_max: float
         Maximum angle to compute stressed for
@@ -150,7 +151,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
         mmax = 3                # spherical object, no point-matching needed (mmax = 0)
     else:
         if (epsilon > 0.15):
-            warnings.warn('Warning, cell stretching ratio is pretty high!') 
+            warnings.warn('Warning, cell stretching ratio is high: {}'.format(epsilon)) 
         mmax = 6*lmax           # spheroidal object, point-matching required (mmax has to be divisible by 3)
 
     EpsilonI  = medium_index**2           # permittivity in surrounding medium [1]  
@@ -905,12 +906,12 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
               + MuI*     (HrL(r,th,phi)*np.conj(HrL(r,th,phi))-HthL(r,th,phi)*np.conj(HthL(r,th,phi))-HphiL(r,th,phi)*np.conj(HphiL(r,th,phi))) \
               + MuI*     (HrR(r,th,phi)*np.conj(HrR(r,th,phi))-HthR(r,th,phi)*np.conj(HthR(r,th,phi))-HphiR(r,th,phi)*np.conj(HphiR(r,th,phi))))
 
-    th = np.zeros(numpoints, dtype=float)
-    r = np.zeros(numpoints, dtype=float)
-    sigma = np.zeros(numpoints, dtype=float)
+    th = np.zeros(n_points, dtype=float)
+    r = np.zeros(n_points, dtype=float)
+    sigma = np.zeros(n_points, dtype=float)
     
-    for ii in range(numpoints):
-        th[ii]     = theta_max/(numpoints - 0.998) *(ii+1-0.999)
+    for ii in range(n_points):
+        th[ii]     = theta_max/(n_points - 0.998) *(ii+1-0.999)
         r[ii]      = a*B1(np.cos(th[ii]))
         sigma[ii]  = sigmarr(r[ii],th[ii],np.pi/4)
         

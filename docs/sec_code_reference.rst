@@ -6,11 +6,18 @@ Code reference
   :maxdepth: 2
 
 
-core
-====
-.. automodule:: ggf.core
-   :members:
-   :undoc-members:
+module-level
+============
+.. autofunction:: ggf.fiber_distance_capillary
+
+.. autofunction:: ggf.get_ggf
+
+.. autofunction:: ggf.legendre2ggf
+
+.. autofunction:: ggf.stress2ggf
+
+.. autofunction:: ggf.stress2legendre
+
 
 matlab_funcs
 ============
@@ -26,32 +33,27 @@ sci_funcs
    :undoc-members:
 
 
-stress.costheta
-===============
-.. automodule:: ggf.stress.costheta
-   :members:
-   :undoc-members:
+stress
+======
+
+.. autofunction:: ggf.stress.get_stress
 
 
 stress.boyde2009
-================
+----------------
 
-core
-----
+stress.boyde2009.core
+.....................
+
 .. automodule:: ggf.stress.boyde2009.core
    :members:
    :undoc-members:
 
 
-globgeomfact
-------------
+stress.boyde2009.globgeomfact
+.............................
+
 .. automodule:: ggf.stress.boyde2009.globgeomfact
    :members:
    :undoc-members:
 
-
-stretcher
----------
-.. automodule:: ggf.stress.boyde2009.stretcher
-   :members:
-   :undoc-members:

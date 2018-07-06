@@ -6,6 +6,8 @@ Code examples
   :maxdepth: 2
 
 
+.. fancy_include:: creep_compliance.py
+
 .. fancy_include:: stress_reproduced.py
 
 .. fancy_include:: stress_decomposition.py
