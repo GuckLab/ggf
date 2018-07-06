@@ -94,7 +94,7 @@ complnc = strains / factors
 # plots
 plt.figure(figsize=(8, 7))
 
-ax1 = plt.subplot(221, "Ellipse fit semi-axes")
+ax1 = plt.subplot(221, title="Ellipse fit semi-axes")
 ax1.plot(time, semimaj*1e6, label="semi-major axis")
 ax1.plot(time, semimin*1e6, label="semi-minor axis")
 ax1.legend()
@@ -107,7 +107,7 @@ ax2.set_xlabel("time [s]")
 ax2.set_ylabel("global geometric factor [Pa]")
 
 ax3 = plt.subplot(223, title="strain")
-ax3.plot(time, strains*100)
+ax3.plot(time, (strains-1)*100)
 ax3.set_xlabel("time [s]")
 ax3.set_ylabel("deformation [%]")
 
