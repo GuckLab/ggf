@@ -92,10 +92,12 @@ for ii in range(len(radius)):
     factors[ii] = f
 
 # compute compliance
-strains = semimaj / semimaj[0]
+strains = (semimaj-semimaj[0]) / semimaj[0]
 complnc = strains / factors
-stretch_index = np.where(time>meta["time_stretch_begin [s]"])[0][0]
+compl_ival = (time>meta["time_stretch_begin [s]"]) * (time<meta["time_stretch_end [s]"])
+stretch_index = np.where(compl_ival)[0][0]
 complnc_1 = strains/factors[stretch_index]
+
 
 # plots
 plt.figure(figsize=(8, 7))
@@ -113,16 +115,16 @@ ax2.set_xlabel("time [s]")
 ax2.set_ylabel("global geometric factor [Pa]")
 
 ax3 = plt.subplot(223, title="strain")
-ax3.plot(time, (strains-1)*100)
+ax3.plot(time, (strains)*100)
 ax3.set_xlabel("time [s]")
-ax3.set_ylabel("deformation [%]")
+ax3.set_ylabel("deformation $w(t)/r_0$ [%]")
 
-ax4 = plt.subplot(224, title="creep compliance")
-ax4.plot(time, complnc_1, label="single GGF")
-ax4.plot(time, complnc, label="series GGF")
+ax4 = plt.subplot(224, title="compliance")
+ax4.plot(time[compl_ival], complnc_1[compl_ival], label="single GGF")
+ax4.plot(time[compl_ival], complnc[compl_ival], label="series GGF")
 ax4.legend()
 ax4.set_xlabel("time [s]")
-ax4.set_ylabel("compliance [Pa⁻¹]")
+ax4.set_ylabel("creep compliance $J(t)$ [Pa⁻¹]")
 
 for ax in [ax1, ax2, ax3, ax4]:
     ax.set_xlim(0, np.round(time.max()))

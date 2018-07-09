@@ -45,7 +45,7 @@ def test_basic():
         object_index=object_index,
         medium_index=medium_index,
         effective_fiber_distance=effective_fiber_distance,
-        fiber_core_diameter=mode_field_diameter,
+        mode_field_diameter=mode_field_diameter,
         power_per_fiber=power_per_fiber,
         wavelength=wavelength,
         n_points=n_points)
