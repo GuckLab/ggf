@@ -18,16 +18,10 @@
 #$ -j y
 # set your output file
 ##$ -o output.txt
-# now initialize the parallel environment with 6 cpus
-##$ -pe smp 1-4
 # use a lotof ram for 3d simulations
-#$ -l mem_free=1G
+#$ -l mem_free=500M
 # default runtime to 15h
-#$ -l h_rt=15:00:00
-# problem with compute-0-16:
-# the difference to other nodes on this host is another cputype (without sse4_2 support)
-# maybe your application uses sse4_2 extensions. Than it will not work of course.
-##$ -l sse42=true
+#$ -l h_rt=5:00:00
 #now we can run our command here. In this example we run the mpi test programm mpi-ring
 
 ${HOME}/CLUSTER/anaconda3/bin/python  ~/CLUSTER/ggf/sge/scan.py client
