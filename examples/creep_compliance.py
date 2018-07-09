@@ -66,7 +66,6 @@ semimin = np.zeros(len(radius), dtype=float)
 strains = np.zeros(len(radius), dtype=float)
 complnc = np.zeros(len(radius), dtype=float)
 
-
 for ii in range(len(radius)):
     # determine semi-major and semi-minor axes
     smaj, smin = ellipse_fit(radius[ii], theta[ii])
@@ -74,6 +73,11 @@ for ii in range(len(radius)):
     semimin[ii] = smin
     # compute GGF
     print("compute ggf smaj={:.3e}, smin={:.3e}".format(smaj, smin))
+    if (time[ii] > meta["time_stretch_begin [s]"]
+            and time[ii] < meta["time_stretch_end [s]"]):
+        power_per_fiber=meta["power_per_fiber_stretch [W]"]
+    else:
+        power_per_fiber=meta["power_per_fiber_trap [W]"]
     f = get_ggf(model="boyde2009",
                 semi_major=smaj,
                 semi_minor=smin,
@@ -81,7 +85,7 @@ for ii in range(len(radius)):
                 medium_index=meta["medium_index"],
                 effective_fiber_distance=meta["effective_fiber_distance [m]"],
                 mode_field_diameter=meta["mode_field_diameter [m]"],
-                power_per_fiber=meta["power_per_fiber [W]"],
+                power_per_fiber=power_per_fiber,
                 wavelength=meta["wavelength [m]"],
                 poisson_ratio=.5)
     print("... ", ii, f)
@@ -90,11 +94,13 @@ for ii in range(len(radius)):
 # compute compliance
 strains = semimaj / semimaj[0]
 complnc = strains / factors
+stretch_index = np.where(time>meta["time_stretch_begin [s]"])[0][0]
+complnc_1 = strains/factors[stretch_index]
 
 # plots
 plt.figure(figsize=(8, 7))
 
-ax1 = plt.subplot(221, title="Ellipse fit semi-axes")
+ax1 = plt.subplot(221, title="ellipse fit semi-axes")
 ax1.plot(time, semimaj*1e6, label="semi-major axis")
 ax1.plot(time, semimin*1e6, label="semi-minor axis")
 ax1.legend()
@@ -112,7 +118,7 @@ ax3.set_xlabel("time [s]")
 ax3.set_ylabel("deformation [%]")
 
 ax4 = plt.subplot(224, title="creep compliance")
-ax4.plot(time, strains/factors[0], label="single GGF")
+ax4.plot(time, complnc_1, label="single GGF")
 ax4.plot(time, complnc, label="series GGF")
 ax4.legend()
 ax4.set_xlabel("time [s]")

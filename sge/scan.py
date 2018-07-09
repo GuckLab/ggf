@@ -15,6 +15,7 @@ if __name__ == "__main__":
                   power_per_fiber=.65,
                   wavelength=780e-9,
                   poisson_ratio=0.5,
+                  n_poly=None,
                   verbose=False)
 
     # changed parameters (each item will produce a new scan)
@@ -26,6 +27,7 @@ if __name__ == "__main__":
                    [["power_per_fiber", .5, .8, 10]],
                    [["wavelength", 700e-9, 820e-9, 10]],
                    [["poisson_ratio", 0.4, .5, 10]],
+                   [["n_poly", 20, 200, 10]],
                    ]
     
     mode = sys.argv[-1]

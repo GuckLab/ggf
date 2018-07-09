@@ -38,7 +38,7 @@ pointing to the right hand fiber.
 
 
 :math:`\cos^2\theta` approximation
----------------------------------
+----------------------------------
 Ray optics is used to compute the optical stress acting on a prolate
 spheroid and a :math:`\sigma_0 cos^2\theta` model is fitted to the
 resulting stress profile with the peak stress
@@ -177,7 +177,7 @@ Notes:
 
 
 Special case: :math:`\cos^2\theta` approximation
--------------------------------------------------
+------------------------------------------------
 Following the above approach, the stress profile
 
 .. math::
