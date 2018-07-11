@@ -32,7 +32,7 @@ if __name__ == "__main__":
                           ],
         setup_requires=['pytest-runner'],
         tests_require=["pytest"],
-        python_requires='>=3.5, <4',
+        python_requires='>=3.6, <4',
         keywords=["optical stretcher",
                   "global geometric factor",
                   ],

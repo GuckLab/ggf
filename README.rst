@@ -4,7 +4,7 @@ ggf
 |PyPI Version| |Tests Status Linux| |Coverage Status| |Docs Status|
 
 
-**ggf** is a Python library for computing global geometric factors and
+**ggf** is a Python 3 library for computing global geometric factors and
 corresponding stresses experienced by dielectric objects in the
 optical stretcher.
 

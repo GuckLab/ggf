@@ -1,6 +1,5 @@
 language: python
 python:
-- '3.5'
 - '3.6'
 notifications:
   email: false
@@ -17,7 +16,7 @@ install:
 script:
 - set -ev
 - if [ "${TEST}" == "PYTEST" ]; then
-       coverage run --source=ggf setup.py test;
+       travis_wait 30 coverage run --source=ggf setup.py test;
        coverage report -m;
        codecov;
   else

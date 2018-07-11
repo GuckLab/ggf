@@ -31,8 +31,6 @@ server_args = [[["semi_major", 8e-6, 10e-6, 10]],
                ]
 
 if __name__ == "__main__":
-
-    
     mode = sys.argv[-1]
     
     if mode == "server":
