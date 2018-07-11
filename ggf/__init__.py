@@ -26,6 +26,8 @@ def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
         # number of orders (estimate from Boyde 2009)
         alpha = semi_minor * 2 * np.pi / wavelength  # size parameter
         n_poly = np.int(np.round(2+alpha+4*(alpha)**(1/3) + 10))
+    else:
+        n_poly = int(np.round(n_poly))
 
     ggf = stress2ggf(stress=sigma, theta=theta, poisson_ratio=poisson_ratio,
                      n_poly=n_poly)

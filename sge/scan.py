@@ -5,8 +5,8 @@ from manager import PM_Client, PM_Server
 
 # default parameters
 kwargs = dict(model="boyde2009",
-              semi_major=10e-6,
-              semi_minor=10e-6,
+              semi_major=8e-6,
+              semi_minor=8e-6,
               object_index=1.3776,
               medium_index=1.335,
               effective_fiber_distance=180e-6,
@@ -18,7 +18,8 @@ kwargs = dict(model="boyde2009",
               verbose=False)
 
 # changed parameters (each item will produce a new scan)
-server_args = [[["semi_major", 10e-6, 15e-6, 10]],
+server_args = [[["semi_major", 8e-6, 10e-6, 10]],
+               [["semi_minor", 6.5e-6, 8e-6, 10]],
                [["object_index", 1.34, 1.39, 10]],
                [["medium_index", 1.33, 1.34, 10]],
                [["effective_fiber_distance", 150e-6, 200e-6, 10]],
