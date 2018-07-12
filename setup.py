@@ -27,8 +27,9 @@ if __name__ == "__main__":
         license="MIT",
         description=description,
         long_description=open('README.rst').read() if exists('README.rst') else '',
-        install_requires=["numpy >= 1.9.0",
-                          "scipy >= 0.18.0",
+        install_requires=["h5py>=2.7.0"
+                          "numpy>=1.9.0",
+                          "scipy>=0.18.0",
                           ],
         setup_requires=['pytest-runner'],
         tests_require=["pytest"],
