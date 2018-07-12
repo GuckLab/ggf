@@ -32,6 +32,16 @@ except:
     SERVERIP = "127.0.0.1"
 
 
+def map_lut2geom(kwargs):
+    kw = kwargs.copy()
+    relative_object_index = kw.pop("relative_object_index")
+    kw["object_index"] = relative_object_index * kw["medium_index"]
+
+    stretch_ratio = kw.pop("stretch_ratio")
+    kw["semi_major"] = stretch_ratio * kw["semi_minor"] + kw["semi_minor"]
+    return kw
+
+
 class PM_Client(jm.JobManager_Client):
     def __init__(self):
         super(PM_Client, self).__init__(server=SERVER, 
@@ -89,10 +99,10 @@ class PM_Server(jm.JobManager_Server):
                     kw[key] = val
                     if np.isnan(out[ii]):
                         putargs = []
+                        kw_ggf = map_lut2geom(kw)
                         for kk in ggf.get_ggf.__code__.co_varnames:
-                            if kk in kw:
-                                putargs.append(kw[kk])
-                        print(putargs)
+                            if kk in kw_ggf:
+                                putargs.append(kw_ggf[kk])
                         self.put_arg(tuple([idset, ii] + putargs))
             else:
                 raise NotImplementedError("TODO")
