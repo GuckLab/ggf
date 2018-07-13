@@ -1,0 +1,27 @@
+#!/bin/bash
+##
+##  Eyexute multiples of these jobs with
+##
+##    qsub -t 1-240:1 sge_job_fdtd.qsub
+##
+#this is an example submission script for the Sun grid engine on biocluster
+# qsub parameters beginning with #$
+#$ -cwd
+#set your mailaddress
+#$ -M paul.mueller@biotec.tu-dresden.de
+# we want a mail on beginning and end of the job
+##$ -m e
+##$ -m a
+# Environment
+#$ -V
+# merge stdout and stderr
+#$ -j y
+# set your output file
+##$ -o output.txt
+# use a lotof ram for 3d simulations
+#$ -l mem_free=500M
+# default runtime to 15h
+#$ -l h_rt=5:00:00
+#now we can run our command here. In this example we run the mpi test programm mpi-ring
+
+${HOME}/CLUSTER/anaconda3/bin/python  ~/CLUSTER/ggf/sge/lut.py client
