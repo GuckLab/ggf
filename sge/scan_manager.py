@@ -13,11 +13,6 @@ SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj31"
 PORT = 42521
 
-RUNMOD = RUNLIB = RUNEXP = ""
-
-# try to put data there:
-SERVERDIR = os.environ["HOME"]+"/sge_out"
-
 try:
     MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
 except OSError:
@@ -74,34 +69,29 @@ class PM_Server(jm.JobManager_Server):
                                         fname_dump=fname_dump)
 
         # output file identifier
-        for arg in server_args:
+        for aset in server_args:
             ids = []
             dims = []
-            for aset in arg:
-                ids.append("{}-{:.3e}-{:.3e}-{:05d}".format(aset[0][:3],
-                                                            aset[1],
-                                                            aset[2],
-                                                            aset[3]))
-                dims.append(aset[3])
+            ids.append("{}-{:.3e}-{:.3e}-{:05d}".format(aset[0][:3],
+                                                        aset[1],
+                                                        aset[2],
+                                                        aset[3]))
+            dims.append(aset[3])
             idset = "_".join(ids)
             # create an n-dimensional search map
             out = self.get_output_npy(idset, dims=dims)
-            if len(dims) == 1:
-                aset = arg[0]
-                key = aset[0]
-                vals = np.linspace(*aset[1:])
-                for ii, val in enumerate(vals):
-                    kw = defaults.copy()
-                    kw[key] = val
-                    if np.isnan(out[ii]):
-                        putargs = []
-                        kw_ggf = map_lut2geom(kw)
-                        for kk in ggf.get_ggf.__code__.co_varnames:
-                            if kk in kw_ggf:
-                                putargs.append(kw_ggf[kk])
-                        self.put_arg(tuple([idset, ii] + putargs))
-            else:
-                raise NotImplementedError("TODO")
+            key = aset[0]
+            vals = np.linspace(*aset[1:])
+            for ii, val in enumerate(vals):
+                kw = defaults.copy()
+                kw[key] = val
+                if np.isnan(out[ii]):
+                    putargs = []
+                    kw_ggf = map_lut2geom(kw)
+                    for kk in ggf.get_ggf.__code__.co_varnames:
+                        if kk in kw_ggf:
+                            putargs.append(kw_ggf[kk])
+                    self.put_arg(tuple([idset, ii] + putargs))
 
     def get_npy_filename(self, idset):
         return "_results_{}.npy".format(idset)

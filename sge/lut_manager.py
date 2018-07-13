@@ -14,11 +14,6 @@ SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj31"
 PORT = 42521
 
-RUNMOD = RUNLIB = RUNEXP = ""
-
-# try to put data there:
-SERVERDIR = os.environ["HOME"]+"/sge_out"
-
 try:
     MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
 except OSError:
