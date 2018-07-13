@@ -106,3 +106,7 @@ examples/*.cache
 docs/ggf.bib.bak
 docs/ggf.bib.sav
 
+# lut computation temporary files
+sge/*.png
+sge/*.npy
+sge/*.h5

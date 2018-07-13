@@ -132,7 +132,7 @@ class PM_Server(jm.JobManager_Server):
                     h5lut.attrs[ff] = lut_set[ff]
             data = lut, labels, mesh
         return data
-    
+
     def save_to_output_h5(self, lut_name, coord, value):
         fn = self.get_h5_filename(lut_name)
         with h5py.File(fn, mode="a") as h5:
