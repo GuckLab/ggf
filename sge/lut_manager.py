@@ -10,8 +10,8 @@ import ggf
 
 
 USERNAME = os.environ["USER"]
-SERVER = "127.0.0.1"
-#SERVER = "guck-paulm-pc"
+#SERVER = "127.0.0.1"
+SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj31"
 PORT = 42521
 NCPUS = mp.cpu_count()
