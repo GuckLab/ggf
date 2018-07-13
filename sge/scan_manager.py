@@ -48,7 +48,6 @@ class PM_Client(jm.JobManager_Client):
                                         authkey=AUTHKEY, 
                                         port=PORT, 
                                         nproc=1,
-                                        nice=19, 
                                         no_warnings=True, 
                                         verbose=1)
 
