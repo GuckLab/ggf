@@ -32,7 +32,7 @@ sys.path.insert(0, pdir)
 sys.path.append(op.abspath('extensions'))
 
 # Mock all dependencies
-install_requires = ["numpy", "scipy"]
+install_requires = ["h5py", "numpy", "scipy", "scipy.interpolate"]
 
 for mod_name in install_requires:
     sys.modules[mod_name] = mock.Mock()
