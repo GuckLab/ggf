@@ -64,6 +64,7 @@ tbd
 
 
 
+.. _sec_theory_ggf:
 
 Computation of the GGF
 ======================

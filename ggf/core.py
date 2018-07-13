@@ -6,6 +6,29 @@ from .sci_funcs import legendrePlm
 
 
 def legendre2ggf(coeff, poisson_ratio):
+    """Compute the global geometric factor from Legendre coefficients
+
+    The definition of the Legendre coefficients is given in
+    :ref:`the theory section <sec_theory_ggf>`.
+
+    Parameters
+    ----------
+    coeff: 1d ndarray
+        Legendre coefficients as defined in :cite:`Lure1964`
+    poisson_ratio: float
+        Poisson's ratio of the stretched material. Set this
+        to 0.5 for volume conservation.
+
+    Returns
+    -------
+    ggf: float
+        Global geometric factor
+
+    Notes
+    -----
+    All odd Legendre coefficients are assumed to be zero, because the
+    stress profile is symmetric with respect to the stretcher axis.
+    """
     m = 1/poisson_ratio
     Delta = lambda n: n*(n-1) + (2*n+1) * (m+1)/m 
     L_n = lambda n: -1/Delta(n) * (2*n+1) * (n+1) * (n-2+4/m)
@@ -39,7 +62,31 @@ def legendre2ggf(coeff, poisson_ratio):
 
 
 def stress2legendre(stress, theta, n_poly):
-    """Decompose stress into even Legendre Polynomials"""
+    """Decompose stress into even Legendre Polynomials
+
+    The definition of the Legendre decomposition is given in
+    :ref:`the theory section <sec_theory_ggf>`.
+
+    Parameters
+    ----------
+    stress: 1d ndarray
+        Radial stress profile (in imaging plane)
+    theta: 1d ndarray
+        Polar angles corresponding to `stress`
+    n_poly: int
+        Number of Legendre polynomials to use
+
+    Returns
+    -------
+    coeff: 1d ndarray
+        Legendre coefficients as defined in :cite:`Lure1964`
+
+    Notes
+    -----
+    All odd Legendre coefficients are assumed to be zero, because the
+    stress profile is symmetric with respect to the stretcher axis.
+    Therefore, only `n_poly/2` polynomials are considered. 
+    """
     # Sigma = Sum_n [Coeff(n) P_n(np.cos(theta))]
     nmax = n_poly                    # number of Legendre polynomials used in fit
 
@@ -61,7 +108,30 @@ def stress2legendre(stress, theta, n_poly):
 
 
 def stress2ggf(stress, theta, poisson_ratio, n_poly):
-    """
+    """Compute the GGf from radial stress using Legendre decomposition
+
+    Parameters
+    ----------
+    stress: 1d ndarray
+        Radial stress profile (in imaging plane)
+    theta: 1d ndarray
+        Polar angles corresponding to `stress`
+    n_poly: int
+        Number of Legendre polynomials to use
+    poisson_ratio: float
+        Poisson's ratio of the stretched material. Set this
+        to 0.5 for volume conservation.
+
+    Returns
+    -------
+    ggf: float
+        Global geometric factor
+
+    Notes
+    -----
+    All odd Legendre coefficients are assumed to be zero, because the
+    stress profile is symmetric with respect to the stretcher axis.
+    Therefore, only `n_poly/2` polynomials are considered. 
     """
     coeff = stress2legendre(stress=stress, theta=theta, n_poly=n_poly)
 
