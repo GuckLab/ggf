@@ -164,7 +164,7 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
       can be considered linear:
 
       - stretch_ratio: linear only within interval of 0.004
-      - semi_minor: linear only within interval of 0.05µm
+      - semi_minor: linear only within interval of 0.08µm
       - relative_object_index: linear only within interval of 0.003
       - medium_index: linear only within interval of 0.005
       - poisson_ratio: good linearity
