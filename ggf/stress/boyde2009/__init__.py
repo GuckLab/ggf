@@ -5,7 +5,10 @@ def get_stress(semi_major, semi_minor, object_index, medium_index,
                effective_fiber_distance=100e6, mode_field_diameter=4.8e-6, 
                power_per_fiber=.6, wavelength=1064e-9, n_points=100,
                verbose=False):
-    """Wraps around core.stress without poisson_ratio"""
+    """Wraps around core.stress without poisson_ratio
+
+    See :func:`ggf.stress.get_stress` for parameter descriptions.
+    """
     return core.stress(
         object_index=object_index,
         medium_index=medium_index,

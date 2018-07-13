@@ -4,7 +4,7 @@ def fiber_distance_capillary(gel_thickness=2e-6, glass_thickness=40e-6,
     """Effective distance between the two optical fibers
 
     When the optical stretcher is combined with a microfluidic
-    channel ("closed setup"), then the effective distance between
+    channel (closed setup), then the effective distance between
     the two optical fibers (with the the stretched object at the
     channel center) is defined by the refractive indices of
     the optical components: index matching gel between fiber and

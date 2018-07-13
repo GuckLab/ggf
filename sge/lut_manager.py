@@ -11,8 +11,8 @@ import ggf
 USERNAME = os.environ["USER"]
 #SERVER = "127.0.0.1"
 SERVER = "guck-paulm-pc"
-AUTHKEY = "d10fj31"
-PORT = 42521
+AUTHKEY = "d10fj32"
+PORT = 42522
 
 try:
     MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
@@ -47,7 +47,7 @@ class PM_Client(jm.JobManager_Client):
     @staticmethod
     def func(args, const_arg):
         try:
-            result = ggf.get_ggf(*args[2:])
+            result = ggf.get_ggf(*args[2:], use_lut=False)
         except:
             result = np.nan
         return (MYIP, USERNAME, result)
@@ -105,6 +105,8 @@ class PM_Server(jm.JobManager_Server):
             assert lut_set is not None, "First call must include 'lut_set'"
             labels = [ll for ll in lut_set if isinstance(lut_set[ll], list)]
             labels = sorted(labels)
+            fixed = [ll for ll in lut_set if ll not in labels]
+            fixed = sorted(fixed)
             # setup meshgrid for client args
             meshgrid_args = []
             dims = []
@@ -118,13 +120,15 @@ class PM_Server(jm.JobManager_Server):
                 if "lut" not in h5:
                     lut = np.nan * np.zeros(dims, dtype=float)
                     h5lut = h5.create_dataset("lut", data=lut)
-                    h5lut.attrs["dimension_order"] = ",".join(labels)
-                    for ll in labels:
-                        h5lut.attrs["{} min".format(ll)] = lut_set[ll][0]
-                        h5lut.attrs["{} max".format(ll)] = lut_set[ll][1]
-                        h5lut.attrs["{} num".format(ll)] = lut_set[ll][2]
                 else:
                     lut = h5["lut"].value
+                h5lut.attrs["dimension_order"] = ",".join(labels)
+                for ll in labels:
+                    h5lut.attrs["{} min".format(ll)] = lut_set[ll][0]
+                    h5lut.attrs["{} max".format(ll)] = lut_set[ll][1]
+                    h5lut.attrs["{} num".format(ll)] = lut_set[ll][2]
+                for ff in fixed:
+                    h5lut.attrs[ff] = lut_set[ff]
             data = lut, labels, mesh
         return data
     

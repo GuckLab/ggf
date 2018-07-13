@@ -46,7 +46,7 @@ class PM_Client(jm.JobManager_Client):
     @staticmethod
     def func(args, const_arg):
         try:
-            result = ggf.get_ggf(*args[2:])
+            result = ggf.get_ggf(*args[2:], use_lut=False)
         except:
             result = np.nan
         return (MYIP, USERNAME, result)
