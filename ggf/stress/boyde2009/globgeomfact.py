@@ -25,7 +25,7 @@ def coeff2ggf(coeff, poisson_ratio=.45):
     - This is a conversion of the Matlab script GGF.m to Python. The
       code solves a linear system of equations to determine all
       Legendre coefficients. The new implementation in
-      :func:`ggf.core.legendre2ggf` uses the direct solution and
+      :func:`ggf.legendre2ggf` uses the direct solution and
       thus should be preferred.
     """
     ## Parameters used in the program
