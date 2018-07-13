@@ -121,7 +121,8 @@ class PM_Server(jm.JobManager_Server):
                     lut = np.nan * np.zeros(dims, dtype=float)
                     h5lut = h5.create_dataset("lut", data=lut)
                 else:
-                    lut = h5["lut"].value
+                    h5lut = h5["lut"] 
+                    lut = h5lut.value
                 h5lut.attrs["dimension_order"] = ",".join(labels)
                 for ll in labels:
                     h5lut.attrs["{} min".format(ll)] = lut_set[ll][0]
