@@ -48,15 +48,16 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
       - `n_poly`: set to a high number (e.g. 120)
     - The following keywords are linear and thus only span a
       a dimension of size two:
-      - relative_object_index
-      - medium_index
       - poisson_ratio: good linearity
       - power_per_fiber: good linearity
-      - effective_fiber_distance: only within 15µm interval
+      - effective_fiber_distance: linear only within 15µm interval
     - The following keywords are not linear and are thus sampled
       with more points:
+      - relative_object_index
+      - medium_index
       - stretch_ratio
       - semi_minor
+
     """
     # convert major_axis to stretch ratio
     stretch_ratio = (semi_major - semi_minor) / semi_minor
