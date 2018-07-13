@@ -1,4 +1,3 @@
-import multiprocessing as mp
 import os
 import socket
 
@@ -14,8 +13,6 @@ USERNAME = os.environ["USER"]
 SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj31"
 PORT = 42521
-NCPUS = mp.cpu_count()
-MPIRUN = "mpirun"
 
 RUNMOD = RUNLIB = RUNEXP = ""
 
