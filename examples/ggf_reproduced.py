@@ -49,7 +49,7 @@ kwargs = {"object_index": 1.37108,
           "wavelength": 1064e-9,
           "power_left": 1.5,
           "power_right": 1.5,
-          "numpoints": 181,
+          "n_points": 181,
           }
 
 kwargs_aos = kwargs.copy()

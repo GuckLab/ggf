@@ -107,7 +107,7 @@ def stress2legendre(stress, theta, n_poly):
     return coeff
 
 
-def stress2ggf(stress, theta, poisson_ratio, n_poly):
+def stress2ggf(stress, theta, poisson_ratio, n_poly=120):
     """Compute the GGf from radial stress using Legendre decomposition
 
     Parameters
@@ -116,11 +116,11 @@ def stress2ggf(stress, theta, poisson_ratio, n_poly):
         Radial stress profile (in imaging plane)
     theta: 1d ndarray
         Polar angles corresponding to `stress`
-    n_poly: int
-        Number of Legendre polynomials to use
     poisson_ratio: float
         Poisson's ratio of the stretched material. Set this
         to 0.5 for volume conservation.
+    n_poly: int
+        Number of Legendre polynomials to use
 
     Returns
     -------

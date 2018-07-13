@@ -8,7 +8,7 @@ import matplotlib.pylab as plt
 import numpy as np
 import percache
 
-from ggf.stress.boyde2009 import stress
+from ggf.stress.boyde2009.core import stress
 
 
 @percache.Cache("stress_reproduced.cache", livesync=True)
@@ -31,7 +31,7 @@ kwargs = {"stretch_ratio": .1,
           "power_left": 1,
           "power_right": 1,
           "poisson_ratio": 0,
-          "numpoints": 200,
+          "n_points": 200,
           }
 
 kwargs1 = kwargs.copy()

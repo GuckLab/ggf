@@ -12,7 +12,7 @@ import numpy as np
 import percache
 
 from ggf.sci_funcs import legendrePlm
-from ggf.stress.boyde2009 import stress
+from ggf.stress.boyde2009.core import stress
 
 
 @percache.Cache("stress_decomposition.cache", livesync=True)
