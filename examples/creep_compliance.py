@@ -5,8 +5,8 @@ compute its GGF and creep compliance. The `contour data
 <_static/creep_compliance_data.h5>`__ were determined
 from `this phase-contrast video <_static/creep_compliance.mp4>`__
 (prior to video compression). During stretching, the total laser
-power was increased from 0.2W to 1.3W (laser reflexes appear
-as white spots).
+power was increased from 0.2W to 1.3W (reflexes due to second
+harmonic effects appear as white spots).
 """
 import ggf
 import h5py
