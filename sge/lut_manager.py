@@ -114,7 +114,7 @@ class PM_Server(jm.JobManager_Server):
                 vals = np.linspace(*lut_set[ll])
                 meshgrid_args.append(vals)
                 dims.append(len(vals))
-            mesh = np.meshgrid(*meshgrid_args)
+            mesh = np.meshgrid(*meshgrid_args, indexing="ij")
             # initialize lut
             with h5py.File(fn, mode="a") as h5:
                 if "lut" not in h5:

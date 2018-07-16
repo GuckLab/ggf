@@ -4,7 +4,7 @@ from pkg_resources import resource_filename
 
 import h5py
 import numpy as np
-from scipy.interpolate import interpnd
+from scipy.interpolate import interpn
 
 
 class NotInLUTError(BaseException):
@@ -64,17 +64,17 @@ def _param_in_lut(key, value, h5_attrs):
         True, if the key-value pair is covered by the LUT
     """
     inlut = False
-    if key in h5_attrs:  # fixed parameter
-        if h5_attrs[key] == value:
-            inlut = True
-    elif isinstance(key, str):  # model
-        inlut = False
-    elif key == "n_poly" and key is None:  # default value is given in LUT
+    if key == "n_poly" and value is None:  # default value is given in LUT
         inlut = True
+    elif key in h5_attrs:  # fixed parameter
+        if h5_attrs[key] == value or value is None:
+            inlut = True
+    elif isinstance(value, str):  # model
+        inlut = False
     else:  # range
         vmin = h5_attrs["{} min".format(key)]
         vmax = h5_attrs["{} max".format(key)]
-        if value < vmax and value > vmin:
+        if value <= vmax and value >= vmin:
             inlut = True
         else:
             inlut = False
@@ -194,7 +194,7 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     # get LUT data
     with h5py.File(lut_path, mode="r") as h5:
         values = h5["lut"].value
-        meta = h5["lut"].attrs.copy()
+        meta = dict(h5["lut"].attrs)
     # order of interpolation dimensions
     order = meta["dimension_order"].split(",")
     # grid points
@@ -206,5 +206,5 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     # interpolation coordinates
     xi = [kwargs[kk] for kk in order]
     # perform interpolation
-    ggf = interpnd(points=points, values=values, xi=xi)
-    return ggf
+    ggf = interpn(points=points, values=values, xi=xi)
+    return np.asscalar(ggf)
