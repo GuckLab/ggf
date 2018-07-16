@@ -17,7 +17,7 @@ def compute_ggf(**kwargs):
 
 def get_kwarg_ranges(lut_path):
     with h5py.File(lut_path, mode="r") as h5:
-        attrs = h5["lut"].attrs.copy()
+        attrs = dict(h5["lut"].attrs)
     
     fixed = {}
     ranges = {}
@@ -25,7 +25,7 @@ def get_kwarg_ranges(lut_path):
     for kw in ["model", "stretch_ratio", "semi_minor", "relative_object_index",
                "medium_index", "effective_fiber_distance",
                "mode_field_diameter", "power_per_fiber",
-               "wavelength", "poisson_ratio"]:
+               "wavelength", "poisson_ratio", "n_poly"]:
         if kw in attrs:
             fixed[kw] = attrs[kw]
         else:
@@ -60,7 +60,6 @@ for path in paths:
         for rr in ranges:
             kwargs[rr] = np.random.uniform(low=ranges[rr][0],
                                            high=ranges[rr][1])
-        stretch_ratio = kwargs.pop("stretch_ratio")
         kw_ggf = map_lut2geom(kwargs)
         # get LUT value
         ggf1 = ggf.get_ggf(use_lut=path, **kw_ggf)

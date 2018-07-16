@@ -2,6 +2,7 @@
  - BREAKING CHANGES:
    - ref: changed submodule imports, please revise your scripts
    - ref: move computation of stress to stress.boyde2009 submodule
+ - feat: added support for GGF look-up tables
  - feat: analytical computation of GGF from Legendre polynomials
  - globgeomfact.coeff2ggf returned complex instead of float
  - docs: add preliminary theoretical part 

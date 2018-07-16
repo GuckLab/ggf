@@ -47,24 +47,25 @@ setup itself, :mod:`ggf` can be used to compute the optical stress
 
 How should I migrate my Matlab pipeline to Python?
 --------------------------------------------------
+
+To reproduce data
+.................
 You can access the computations performed in *StretcherNStress.m* via
-:func:`ggf.core.stress`.
+:func:`ggf.core.stress.boyde2009`.
 
 .. code::
 
     from ggf.stress.boyde2009 import stress
     theta, sigma, coeff = stress(object_index=1.41,
                                  medium_index=1.3465,
-                                 radius=2.8466e-6,    # [m]
+                                 radius=2.8466e-6,       # [m]
                                  poisson_ratio=0.45,
                                  stretch_ratio=0.1,
-                                 wavelength=780e-9,   # [m]
-                                 beam_waist=3,        # [wavelengths]
-                                 power_left=.6,       # [W]
-                                 power_right=.6,      # [W]
-                                 dist = 100e-6,       # [m]
-                                 numpoints=100,
-                                 theta_max=np.pi,
+                                 wavelength=780e-9,      # [m]
+                                 beam_waist=3.08,        # [wavelengths]
+                                 power_left=.65,         # [W]
+                                 power_right=.65,        # [W]
+                                 dist=180e-6,            # [m]
                                  field_approx="davis",
                                  ret_legendre_decomp=True)
 
@@ -78,3 +79,34 @@ The GGF can be computed from the coefficients ``coeff`` via
 
 These methods produce the same output as the original Matlab scripts
 with an accuracy that is below the standard tolerance of :func:`numpy.allclose`.
+
+For a new project
+.................
+In general, the method :func:`ggf.get_ggf` is recommended. The difference
+to the above method is:
+
+- It makes use of precomputed look-up tables (LUTs) which avoids long
+  computation times. The error made by using LUTs is below :math:`10^{-5}` Pa.
+- It comes with user-convenient keyword arguments.
+- The GGF is computed from 120 Legendre coefficients by default, a number
+  that was previously determined automatically and could have potentially
+  been too low.
+- TODO: Poisson's ratio ambiguity
+
+Please note that due to these points, the resulting GGF might
+vary from the GGF computed with the original Matlab script.
+
+.. code::
+
+    import ggf
+    GGF = ggf.get_ggf(model="boyde2009",
+                      semi_major=3.2788e-6 ,            # [m]
+                      semi_minor=2.8466e- 6,            # [m]
+                      object_index=1.41,
+                      medium_index=1.3465,
+                      effective_fiber_distance=180e-6,  # [m]
+                      mode_field_diameter=4.8e-06,      # [m]
+                      power_per_fiber=.65,              # [W]
+                      wavelength=780e-9,                # [m]
+                      poisson_ratio=0.45)
+
