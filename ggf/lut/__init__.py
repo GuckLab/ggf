@@ -1,6 +1,7 @@
 """Look-up table for GGF computation"""
 import pathlib
 from pkg_resources import resource_filename
+import warnings
 
 import h5py
 import numpy as np
@@ -205,6 +206,11 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
                                   meta["{} num".format(label)]))
     # interpolation coordinates
     xi = [kwargs[kk] for kk in order]
+
+    if np.sum(np.isnan(values)):
+        msg = "Replacing NaN-values in LUT '{}' with '42'!".format(lut_path)
+        warnings.warn(msg)
+        values[np.isnan(values)] = 42
     # perform interpolation
     ggf = interpn(points=points, values=values, xi=xi)
     return np.asscalar(ggf)

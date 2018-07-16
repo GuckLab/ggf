@@ -10,7 +10,7 @@ from .stress.geometry import fiber_distance_capillary
 def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
             effective_fiber_distance=100e-6, mode_field_diameter=3e-6,
             power_per_fiber=.6, wavelength=1064e-9, poisson_ratio=0.5,
-            n_poly=None, use_lut=None, verbose=False):
+            n_poly=120, use_lut=None, verbose=False):
     """Model the global geometric factor
 
     Parameters
@@ -49,7 +49,9 @@ def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
     n_poly: int
         Number of Legendre polynomials to use for computing the GGF.
         Note that only even Legendre polynomials are used and thus,
-        this number is effectively halved.
+        this number is effectively halved. To reproduce the GGF as
+        computed with the Boyde2009 Matlab script, set this value
+        to `None`.
     use_lut: None, str, pathlib.Path or bool
         Use look-up tables to compute the GGF. If set to `None`,
         the internal LUTs will be used or the GGF is computed if
