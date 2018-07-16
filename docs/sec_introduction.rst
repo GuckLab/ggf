@@ -100,8 +100,8 @@ vary from the GGF computed with the original Matlab script.
 
     import ggf
     GGF = ggf.get_ggf(model="boyde2009",
-                      semi_major=3.2788e-6 ,            # [m]
-                      semi_minor=2.8466e- 6,            # [m]
+                      semi_major=3.2788e-6,             # [m]
+                      semi_minor=2.8466e-6,             # [m]
                       object_index=1.41,
                       medium_index=1.3465,
                       effective_fiber_distance=180e-6,  # [m]
