@@ -33,7 +33,7 @@ luts = {
     "guck_all_cell":
         {"model": "boyde2009",
          "stretch_ratio": [0, .13, 33],
-         "semi_minor": [5e-6, 8e-6, 18],
+         "semi_minor": [5e-6, 10e-6, 30],
          "relative_object_index": [1.015, 1.035, 7],
          "medium_index": [1.333, 1.338, 2],
          "effective_fiber_distance": [158e-6, 175e-6, 2],

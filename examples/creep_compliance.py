@@ -49,7 +49,7 @@ def ellipse_fit(radius, theta):
 
 @mycache
 def get_ggf(**kw):
-    f = ggf.get_ggf(**kw)
+    f = ggf.get_ggf(use_lut=True, **kw)
     return f
 
 # load the contour data (stored in polar coordinates)
