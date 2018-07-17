@@ -69,7 +69,7 @@ class PM_Server(jm.JobManager_Server):
                                         msg_interval=msg_interval,
                                         fname_dump=fname_dump)
 
-        for lut_name in server_args:
+        for lut_name in sorted(server_args.keys())[::-1]:
             lut_set = server_args[lut_name]
             # default keyword arguments
             default_kw = {}
