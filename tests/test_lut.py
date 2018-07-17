@@ -43,7 +43,7 @@ def test_exact_fus():
 
 
 @pytest.mark.xfail
-def test_basic_semi_major():
+def test_basic_fus_semi_major():
     f = ggf.get_ggf(model="boyde2009",
                     semi_major=2.8e-6*1.0018181818181818182,
                     semi_minor=2.8e-6,
@@ -55,7 +55,7 @@ def test_basic_semi_major():
                     wavelength=780e-9,
                     poisson_ratio=.4,
                     n_poly=None,
-                    use_lut=False)
+                    use_lut=True)
     exact = 1.237550828156066
     assert np.allclose(exact, f, rtol=0, atol=1e-5)
 

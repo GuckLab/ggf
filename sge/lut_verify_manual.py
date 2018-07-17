@@ -47,7 +47,7 @@ def map_lut2geom(kwargs):
 
 # get lut paths
 paths = pathlib.Path(__file__).parent.glob("*.h5")
-paths = sorted(paths)
+paths = sorted(paths)[::-1]
 
 
 for path in paths:
@@ -65,4 +65,4 @@ for path in paths:
         ggf1 = ggf.get_ggf(use_lut=path, **kw_ggf)
         # compute value (cached)
         ggf2 = compute_ggf(**kw_ggf)
-        print("{:03d} error: {:.5f}".format(ii, ggf2-ggf1))
+        print("{:03d} error: {:.1f}%".format(ii, (ggf2-ggf1)/ggf2*100))

@@ -1,21 +1,20 @@
 from lmfit.models import LinearModel
 import matplotlib.pylab as plt
+import matplotlib.ticker as mtick
 import numpy as np
 
 from scan import server_args
 
-for arg in server_args:
+for aset in server_args:
     ids = []
     dims = []
-    for aset in arg:
-        ids.append("{}-{:.3e}-{:.3e}-{:05d}".format(aset[0][:3],
-                                                    aset[1],
-                                                    aset[2],
-                                                    aset[3]))
+    ids.append("{}-{:.3e}-{:.3e}-{:05d}".format(aset[0][:3],
+                                                aset[1],
+                                                aset[2],
+                                                aset[3]))
     idset = "_".join(ids)
     data = np.load("_results_{}.npy".format(idset))
     
-    aset = arg[0]
     vals = np.linspace(*aset[1:])
     ax = plt.subplot(111)
     ax.plot(vals, data, "o")
@@ -37,6 +36,8 @@ for arg in server_args:
     if np.nanmin(data) > .6 and np.nanmax(data) < .9:
         ax.set_ylim(.6, .9)
 
+    if x.max() > 1000 or x.max() < 1e-2:
+        ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%1.1e'))
 
     plt.grid()
     plt.tight_layout()
