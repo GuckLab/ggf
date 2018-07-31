@@ -49,7 +49,7 @@ def ellipse_fit(radius, theta):
 
 @mycache
 def get_ggf(**kw):
-    f = ggf.get_ggf(use_lut=True, **kw)
+    f = ggf.get_ggf(**kw)
     return f
 
 # load the contour data (stored in polar coordinates)
@@ -76,18 +76,21 @@ for ii in range(len(radius)):
     if (time[ii] > meta["time_stretch_begin [s]"]
             and time[ii] < meta["time_stretch_end [s]"]):
         power_per_fiber=meta["power_per_fiber_stretch [W]"]
+        f = get_ggf(model="boyde2009",
+                    semi_major=smaj,
+                    semi_minor=smin,
+                    object_index=meta["object_index"],
+                    medium_index=meta["medium_index"],
+                    effective_fiber_distance=meta["effective_fiber_distance [m]"],
+                    mode_field_diameter=meta["mode_field_diameter [m]"],
+                    power_per_fiber=power_per_fiber,
+                    wavelength=meta["wavelength [m]"],
+                    poisson_ratio=.5,
+                    use_lut=False)
     else:
         power_per_fiber=meta["power_per_fiber_trap [W]"]
-    f = get_ggf(model="boyde2009",
-                semi_major=smaj,
-                semi_minor=smin,
-                object_index=meta["object_index"],
-                medium_index=meta["medium_index"],
-                effective_fiber_distance=meta["effective_fiber_distance [m]"],
-                mode_field_diameter=meta["mode_field_diameter [m]"],
-                power_per_fiber=power_per_fiber,
-                wavelength=meta["wavelength [m]"],
-                poisson_ratio=.5)
+        f = np.nan
+
     print("... ", ii, f)
     factors[ii] = f
 
