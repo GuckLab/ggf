@@ -1,6 +1,6 @@
 """Creep compliance analysis
 
-This example uses the contour data of an cell in the OS to
+This example uses the contour data of aN hl60 cell in the OS to
 compute its GGF and creep compliance. The `contour data
 <_static/creep_compliance_data.h5>`__ were determined
 from `this phase-contrast video <_static/creep_compliance.mp4>`__
@@ -13,9 +13,6 @@ import h5py
 import lmfit
 import matplotlib.pylab as plt
 import numpy as np
-import percache
-
-mycache = percache.Cache("creep_compliance.cache", livesync=True)
 
 
 def ellipse_fit(radius, theta):
@@ -44,13 +41,9 @@ def ellipse_fit(radius, theta):
     parms.add(name="b", value=radius.mean())
 
     res = lmfit.minimize(residuals, parms, args=(radius, theta))
-    
+
     return res.params["a"].value, res.params["b"].value
 
-@mycache
-def get_ggf(**kw):
-    f = ggf.get_ggf(**kw)
-    return f
 
 # load the contour data (stored in polar coordinates)
 with h5py.File("data/creep_compliance_data.h5", "r") as h5:
@@ -72,35 +65,32 @@ for ii in range(len(radius)):
     semimaj[ii] = smaj
     semimin[ii] = smin
     # compute GGF
-    print("compute ggf smaj={:.3e}, smin={:.3e}".format(smaj, smin))
     if (time[ii] > meta["time_stretch_begin [s]"]
             and time[ii] < meta["time_stretch_end [s]"]):
-        power_per_fiber=meta["power_per_fiber_stretch [W]"]
-        f = get_ggf(model="boyde2009",
-                    semi_major=smaj,
-                    semi_minor=smin,
-                    object_index=meta["object_index"],
-                    medium_index=meta["medium_index"],
-                    effective_fiber_distance=meta["effective_fiber_distance [m]"],
-                    mode_field_diameter=meta["mode_field_diameter [m]"],
-                    power_per_fiber=power_per_fiber,
-                    wavelength=meta["wavelength [m]"],
-                    poisson_ratio=.5,
-                    use_lut=False)
+        power_per_fiber = meta["power_per_fiber_stretch [W]"]
+        f = ggf.get_ggf(
+            model="boyde2009",
+            semi_major=smaj,
+            semi_minor=smin,
+            object_index=meta["object_index"],
+            medium_index=meta["medium_index"],
+            effective_fiber_distance=meta["effective_fiber_distance [m]"],
+            mode_field_diameter=meta["mode_field_diameter [m]"],
+            power_per_fiber=power_per_fiber,
+            wavelength=meta["wavelength [m]"],
+            poisson_ratio=.5)
     else:
-        power_per_fiber=meta["power_per_fiber_trap [W]"]
+        power_per_fiber = meta["power_per_fiber_trap [W]"]
         f = np.nan
-
-    print("... ", ii, f)
     factors[ii] = f
 
 # compute compliance
 strains = (semimaj-semimaj[0]) / semimaj[0]
 complnc = strains / factors
-compl_ival = (time>meta["time_stretch_begin [s]"]) * (time<meta["time_stretch_end [s]"])
+compl_ival = (time > meta["time_stretch_begin [s]"]) * \
+    (time < meta["time_stretch_end [s]"])
 stretch_index = np.where(compl_ival)[0][0]
 complnc_1 = strains/factors[stretch_index]
-
 
 # plots
 plt.figure(figsize=(8, 7))
@@ -122,12 +112,10 @@ ax3.plot(time, (strains)*100)
 ax3.set_xlabel("time [s]")
 ax3.set_ylabel("deformation $w(t)/r_0$ [%]")
 
-ax4 = plt.subplot(224, title="compliance")
-ax4.plot(time[compl_ival], complnc_1[compl_ival], label="single GGF")
-ax4.plot(time[compl_ival], complnc[compl_ival], label="series GGF")
-ax4.legend()
+ax4 = plt.subplot(224, title="creep compliance")
+ax4.plot(time[compl_ival], complnc[compl_ival])
 ax4.set_xlabel("time [s]")
-ax4.set_ylabel("creep compliance $J(t)$ [Pa⁻¹]")
+ax4.set_ylabel("compliance $J(t)$ [Pa⁻¹]")
 
 for ax in [ax1, ax2, ax3, ax4]:
     ax.set_xlim(0, np.round(time.max()))
