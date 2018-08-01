@@ -1,6 +1,6 @@
 """Creep compliance analysis
 
-This example uses the contour data of aN hl60 cell in the OS to
+This example uses the contour data of an HL60 cell in the OS to
 compute its GGF and creep compliance. The `contour data
 <_static/creep_compliance_data.h5>`__ were determined
 from `this phase-contrast video <_static/creep_compliance.mp4>`__
