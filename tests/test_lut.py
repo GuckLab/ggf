@@ -7,19 +7,22 @@ import ggf
 @pytest.mark.xfail
 def test_exact_cell():
     """Test the exact value on a LUT grid point"""
+    stretch_ratio = 0.065
+    semi_minor = 6.724137931034484e-06
+    semi_major = semi_minor * (stretch_ratio + 1)
     f = ggf.get_ggf(model="boyde2009",
-                    semi_major=6.928571428571428e-06 * 1.1,
-                    semi_minor=6.928571428571428e-06,
-                    object_index=1.333*1.02,
+                    semi_major=semi_major,
+                    semi_minor=semi_minor,
+                    object_index=1.333*1.025,
                     medium_index=1.333,
-                    effective_fiber_distance=170e-6,
+                    effective_fiber_distance=175e-6,
                     mode_field_diameter=4.8e-6,
                     power_per_fiber=.65,
                     wavelength=780e-9,
                     poisson_ratio=.5,
                     n_poly=120,
                     use_lut=True)
-    exact = 0.7888899878534735
+    exact = 0.7711334992513761
     assert np.allclose(exact, f, rtol=0, atol=1e-10)
 
 
