@@ -4,11 +4,16 @@ This example illustrates how the parameters Poisson's ratio
 :math:`\nu` and stretch ratio :math:`\epsilon` influence
 the object boundary used in :func:`ggf.core.stress` and
 defined in :func:`ggf.core.boundary`.
+
+Note that the boundary function was not defined correctly prior to
+version 0.3.0 (`issue #1 <https://github.com/GuckLab/ggf/issues/1>`__).
+Since version 0.3.0, the semi-minor axis is equivalent to the
+keyword argument `a` (1 by default).
 """
 import numpy as np
 import matplotlib.pylab as plt
 
-from ggf.stress.boyde2009 import boundary
+from ggf.stress.boyde2009.core import boundary
 
 theta = np.linspace(0, 2*np.pi, 300)
 costheta = np.cos(theta)

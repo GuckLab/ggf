@@ -6,7 +6,10 @@ from ggf.stress.boyde2009 import core
 
 
 def test_basic():
-    # reference data created with Boyde's Matlab script using default parameters
+    # Originally, the reference data ere created with Boyde's Matlab
+    # script using default parameters. Due to a mistake in the boundary
+    # function (issue #1), the reference data were recreated with the
+    # Python ggf package.
     rpath = pathlib.Path(__file__).resolve().parent / "data"
     th_ref, sigmarr_ref = np.loadtxt(str(rpath / "stress_default.dat"))
     coeff_ref = np.loadtxt(str(rpath / "coeff_default.dat"))
@@ -17,7 +20,10 @@ def test_basic():
 
 
 def test_basic_barton():
-    # reference data created with Boyde's Matlab script using default parameters
+    # Originally, the reference data ere created with Boyde's Matlab
+    # script using default parameters. Due to a mistake in the boundary
+    # function (issue #1), the reference data were recreated with the
+    # Python ggf package.
     rpath = pathlib.Path(__file__).resolve().parent / "data"
     th_ref, sigmarr_ref = np.loadtxt(str(rpath / "stress_default_barton.dat"))
     coeff_ref = np.loadtxt(str(rpath / "coeff_default_barton.dat"))
@@ -36,7 +42,7 @@ def test_droplet():
     # We take the average of the two to compute the stress.
     # This is wrong.
     radius = (semi_major + semi_minor) / 2
-    th, sigmarr, coeff = core.stress(radius=radius,
+    th, sigmarr, coeff = core.stress(semi_minor=radius,
                                      object_index=1.41,
                                      medium_index=1.3465,
                                      ret_legendre_decomp=True)
@@ -44,13 +50,14 @@ def test_droplet():
 
 
 def test_barton_davis_difference():
-    th1, sigmarr1 = core.stress(radius=1e-6, field_approx="davis")
-    th2, sigmarr2 = core.stress(radius=1e-6, field_approx="barton")
+    th1, sigmarr1 = core.stress(semi_minor=1e-6, field_approx="davis")
+    th2, sigmarr2 = core.stress(semi_minor=1e-6, field_approx="barton")
     assert np.allclose(sigmarr1, sigmarr2, rtol=0, atol=3e-4)
 
 
 
 if __name__ == "__main__":
+    test_droplet()
     # Run all tests
     loc = locals()
     for key in list(loc.keys()):

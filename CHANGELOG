@@ -1,5 +1,8 @@
 0.3.0
  - add look-up table for cells (distribution on PyPI only)
+ - fix: mistake in boundary function in boyde2009 stress computation
+   due to mix-up of "inner radius" and "initial radius", affects only
+   non-zero values of Poisson's ratio (#1)
 0.2.0
  - BREAKING CHANGES:
    - ref: changed submodule imports, please revise your scripts

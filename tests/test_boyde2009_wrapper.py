@@ -1,7 +1,6 @@
 import pathlib
 
 import numpy as np
-import pytest
 
 import ggf
 from ggf.stress import boyde2009
@@ -26,7 +25,7 @@ def test_basic():
     n_points = 10
 
     th1, sg1 = boyde2009.core.stress(
-        radius=radius,
+        semi_minor=radius,
         stretch_ratio=stretch_ratio,
         poisson_ratio=poisson_ratio,
         object_index=object_index,
@@ -54,7 +53,6 @@ def test_basic():
     assert np.allclose(sg1, sg2)
 
 
-@pytest.mark.xfail
 def test_boundary():
     """Geometry should not depend on Poisson's ratio"""
     radius = 2.8466e-6

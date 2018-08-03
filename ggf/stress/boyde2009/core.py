@@ -51,8 +51,6 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
     x = costheta
     B = a*(1+epsilon) \
         / ((1+epsilon)**2 - epsilon*(1+nu)*(2+epsilon*(1-nu))*x**2)**.5
-    B *= (1-nu*epsilon)
-
     return B
 
 
@@ -69,11 +67,14 @@ def get_hgc():
 
 
 def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
-           radius=2.8466e-6, stretch_ratio=0.1, wavelength=780e-9,
+           semi_minor=2.8466e-6, stretch_ratio=0.1, wavelength=780e-9,
            beam_waist=3, power_left=.6, power_right=.6, dist=100e-6,
            n_points=100, theta_max=np.pi, field_approx="davis",
            ret_legendre_decomp=False, verbose=False):
     """Compute the stress acting on a prolate spheroid
+
+    The prolate spheroid has semi-major axis :math:`a` and
+    semi-minor axis :math:`b=c`.
 
     Parameters
     ----------
@@ -83,10 +84,11 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
         Refractive index of the surrounding medium
     poisson_ratio: float
         Poisson's ratio of the spheroid material
-    radius: float
-        TODO
+    semi_minor: float
+        Semi-minor axis (inner) radius of the stretched object
+        :math:`b=c`.
     stretch_ratio: float
-        TODO
+        Measure of the deformation, defined as :math:`(a - b) / b`
     wavelength: float
         Wavelenth of the gaussian beam [m]
     beam_waist: float
@@ -137,7 +139,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
     #WZ  = W0*(1+(beam_pos+d)**2/ZRL**2)**0.5   # beam waist at specified position [m]
     
     K0 = 2*np.pi/wavelength         # wave vector [m]
-    Alpha = radius*K0                # size parameter  
+    Alpha = semi_minor*K0                # size parameter  
     C = 3e8                 # speed of light [m/s]
 
 
@@ -168,7 +170,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
 
     # dimensionless parameters
     k0  = 1                    # wave vector
-    a   = radius * K0               # internal radius of stretched cell
+    a   = semi_minor * K0               # internal radius of stretched cell
     d   = dist * K0               # distance from cell centre to optical stretcher
     #ap = a*(1+stretch_ratio)             # semi-major axis (after stretching)
     #bp = a*(1-poisson_ratio*stretch_ratio)          # semi-minor axis (after stretching) 

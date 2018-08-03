@@ -6,6 +6,11 @@ polynomials :math:`P_n(\text{cos}(\theta))`. This example visualizes
 the small differences between the original stress and the stress
 computed from the Legendre coefficients. This plot is automatically
 produced by the original Matlab script *StretcherNStress.m*.
+
+Note that the original Matlab yields different results for the
+same set of parameters, because the Poisson's ratio (keyword
+argument ``poisson_ratio``) is non-zero;
+see `issue #1 <https://github.com/GuckLab/ggf/issues/1>`__.
 """
 import matplotlib.pylab as plt
 import numpy as np
@@ -23,7 +28,7 @@ def compute(**kwargs):
 
 # compute default stress
 theta, sigmarr, coeff = compute(ret_legendre_decomp=True,
-                                numpoints=300)
+                                n_points=300)
 
 # compute stress from coefficients
 numpoints = theta.size

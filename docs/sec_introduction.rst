@@ -51,14 +51,20 @@ How should I migrate my Matlab pipeline to Python?
 To reproduce data
 .................
 You can access the computations performed in *StretcherNStress.m* via
-:func:`ggf.core.stress.boyde2009`.
+:func:`ggf.stress.boyde2009.core.stress`.
 
+.. warning:: There was a mistake in the original boundary function (see
+    `issue #1 <https://github.com/GuckLab/ggf/issues/1>`__). This affects
+    all cases where ``poisson_ratio`` is non-zero. If you would like
+    to reproduce exactly the stress profiles of *StretcherNStress.m*,
+    please use ggf version 0.2.0.
+    
 .. code::
 
-    from ggf.stress.boyde2009 import stress
+    from ggf.stress.boyde2009.core import stress
     theta, sigma, coeff = stress(object_index=1.41,
                                  medium_index=1.3465,
-                                 radius=2.8466e-6,       # [m]
+                                 semi_minor=2.8466e-6,   # [m]
                                  poisson_ratio=0.45,
                                  stretch_ratio=0.1,
                                  wavelength=780e-9,      # [m]
@@ -70,7 +76,7 @@ You can access the computations performed in *StretcherNStress.m* via
                                  ret_legendre_decomp=True)
 
 The GGF can be computed from the coefficients ``coeff`` via
-:func:`ggf.globgeomfact.coeff2ggf`.
+:func:`ggf.legendre2ggf`.
 
 .. code::
 
@@ -86,12 +92,11 @@ In general, the method :func:`ggf.get_ggf` is recommended. The difference
 to the above method is:
 
 - It makes use of precomputed look-up tables (LUTs) which avoids long
-  computation times. The error made by using LUTs is below :math:`10^{-5}` Pa.
+  computation times. The error made by using LUTs maxes at about 1-2%.
 - It comes with user-convenient keyword arguments.
 - The GGF is computed from 120 Legendre coefficients by default, a number
   that was previously determined automatically and could have potentially
   been too low.
-- TODO: Poisson's ratio ambiguity
 
 Please note that due to these points, the resulting GGF might
 vary from the GGF computed with the original Matlab script.
@@ -109,4 +114,3 @@ vary from the GGF computed with the original Matlab script.
                       power_per_fiber=.65,              # [W]
                       wavelength=780e-9,                # [m]
                       poisson_ratio=0.45)
-

@@ -13,7 +13,7 @@ def test_basic():
     ggf1 = legendre2ggf(coeff1, poisson_ratio=.45)
     ggf2 = legendre2ggf(coeff2, poisson_ratio=.45)
 
-    assert np.allclose(ggf1, 0.75019897326485)
+    assert np.allclose(ggf1, 0.7100497580269144)
     assert np.allclose(ggf2, 0.752157535649718)
 
 
