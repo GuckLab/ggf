@@ -18,10 +18,21 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
 
     .. math::
 
-       B(\\theta) = a (1+\\epsilon) (1-\\nu \\epsilon)
+       B(\\theta) = a (1+\\epsilon)
        \\left[ (1+\\epsilon)^2 - \\epsilon (1+\\nu)
        (2+\\epsilon (1-\\nu)) \\cos^2 \\theta \\right]^{-1/2}
-    
+
+    This boundary function was derived for a prolate spheroid under
+    the assumption that the semi-major axis :math:`a` and the
+    semi-minor axes :math:`b=c` are defined as
+
+    .. math::
+
+       a = b \\cdot \\frac{1+ \\epsilon}{1- \\nu \\epsilon}
+
+    The boundary function :math:`B(\\theta)` can be derived with
+    the above relation using the equation for a prolate spheroid.
+
     Parameters
     ----------
     costheta: float or np.ndarray
