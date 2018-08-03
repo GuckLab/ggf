@@ -39,11 +39,10 @@ def boundary(costheta, a=1, epsilon=.1, nu=0):
         Cosine of polar coordinates :math:`\\theta`
         at which to compute the boundary.
     a: float
-        Equatorial radii of prolate spheroid (semi-minor axis)
-        :math:`b' = c' \\equiv a`.
+        Equatorial radii of prolate spheroid (semi-minor axis).
     epsilon: float
         Stretch ratio; defines size of semi-major axis:
-        :math:`a' = (1+\\epsilon) a`. Note that this is not
+        :math:`a = (1+\\epsilon) b`. Note that this is not
         the eccentricity of the prolate spheroid.
     nu: float
         Poisson's ratio :math:`\\nu` of the material.
