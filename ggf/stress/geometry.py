@@ -1,3 +1,5 @@
+
+
 def fiber_distance_capillary(gel_thickness=2e-6, glass_thickness=40e-6,
                              channel_width=40e-6, gel_index=1.449,
                              glass_index=1.474, medium_index=1.335):
@@ -39,6 +41,6 @@ def fiber_distance_capillary(gel_thickness=2e-6, glass_thickness=40e-6,
     `eff_dist` = 2*`gel_dist` + 2*`glass_dist` + `channel_width`.
     """
     eff_dist = 2 * medium_index / gel_index * gel_thickness \
-               + 2 * medium_index / glass_index * glass_thickness \
-               + channel_width
+        + 2 * medium_index / glass_index * glass_thickness \
+        + channel_width
     return eff_dist

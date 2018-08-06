@@ -1,7 +1,6 @@
 """Look-up table for GGF computation"""
 import pathlib
 from pkg_resources import resource_filename
-import warnings
 
 import h5py
 import numpy as np
@@ -134,7 +133,7 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
         this number is effectively halved.
     lut_path: str or pathlib.Path
         Path to a LUT hdf5 file. If `None`, the internal LUTs are
-        used. 
+        used.
     verbose: int
         Increases verbosity
 
@@ -149,7 +148,7 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
       `semi_major < semi_minor` or `object_index < medium_index`,
       the LUT is not built using the exact same keyword arguments
       as this method:
-    
+
       - `object_index` is stored as
         ``relative_object_index = object_index / medium_index``
       - `semi_major` is stored as

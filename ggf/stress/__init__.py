@@ -1,5 +1,5 @@
 from . import boyde2009
-from .geometry import fiber_distance_capillary
+from .geometry import fiber_distance_capillary  # noqa: F401
 
 VALID_MODELS = ["boyde2009"]
 

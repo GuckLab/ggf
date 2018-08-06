@@ -1,10 +1,10 @@
 import numpy as np
 import pathlib
 
-from .core import legendre2ggf, stress2ggf, stress2legendre
+from .core import legendre2ggf, stress2ggf, stress2legendre  # noqa: F401
 from . import lut
 from . import stress
-from .stress.geometry import fiber_distance_capillary
+from .stress.geometry import fiber_distance_capillary  # noqa: F401
 
 
 def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
@@ -58,7 +58,7 @@ def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
         it cannot be found in a LUT. If `True`, the internal LUTs
         will be used and a `NotInLUTError` will be raised if the
         GGF cannot be found there. Alternatively, a path to a
-        LUT hdf5 file can be passed. 
+        LUT hdf5 file can be passed.
     verbose: int
         Increases verbosity
 
@@ -121,7 +121,7 @@ def get_ggf(model, semi_major, semi_minor, object_index, medium_index,
         if n_poly is None:
             # number of orders (estimate from Boyde 2009)
             alpha = semi_minor * 2 * np.pi / wavelength  # size parameter
-            n_poly = np.int(np.round(2+alpha+4*(alpha)**(1/3) + 10))
+            n_poly = np.int(np.round(2 + alpha + 4 * (alpha)**(1 / 3) + 10))
         else:
             n_poly = int(np.round(n_poly))
 
