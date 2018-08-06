@@ -8,19 +8,20 @@ import ggf
 
 
 USERNAME = os.environ["USER"]
-#SERVER = "127.0.0.1"
+# SERVER = "127.0.0.1"
 SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj31"
 PORT = 42521
 
 try:
-    MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
+    MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close())
+            for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
 except OSError:
     MYIP = "127.0.0.1"
 
 try:
     SERVERIP = socket.gethostbyname(SERVER)
-except:
+except BaseException:
     SERVERIP = "127.0.0.1"
 
 
@@ -36,30 +37,30 @@ def map_lut2geom(kwargs):
 
 class PM_Client(jm.JobManager_Client):
     def __init__(self):
-        super(PM_Client, self).__init__(server=SERVER, 
-                                        authkey=AUTHKEY, 
-                                        port=PORT, 
+        super(PM_Client, self).__init__(server=SERVER,
+                                        authkey=AUTHKEY,
+                                        port=PORT,
                                         nproc=1,
-                                        no_warnings=True, 
+                                        no_warnings=True,
                                         verbose=1)
 
     @staticmethod
     def func(args, const_arg):
         try:
             result = ggf.get_ggf(*args[2:], use_lut=False)
-        except:
+        except BaseException:
             result = np.nan
         return (MYIP, USERNAME, result)
 
 
 class PM_Server(jm.JobManager_Server):
     def __init__(self, server_args, defaults):
-        
+
         # setup init parameters for the ancestor class
         fname_dump = None
         verbose = 1
         msg_interval = 1
-        
+
         # init ancestor class
         super(PM_Server, self).__init__(authkey=AUTHKEY,
                                         port=PORT,
@@ -105,7 +106,7 @@ class PM_Server(jm.JobManager_Server):
             data = np.nan * np.zeros(dims, dtype=float)
             np.save(fn, data)
         return data
-    
+
     def save_to_output_npy(self, idset, coord, value):
         fn = self.get_npy_filename(idset)
         d = self.get_output_npy(idset)

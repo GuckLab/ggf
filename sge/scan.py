@@ -36,7 +36,7 @@ if case == 1:
 
 if __name__ == "__main__":
     mode = sys.argv[-1]
-    
+
     if mode == "server":
         with PM_Server(server_args, defaults=kwargs) as server:
             server.start()
@@ -46,4 +46,3 @@ if __name__ == "__main__":
     else:
         print("Unknown mode:", mode)
         print("Specify 'server' or 'client'")
-

@@ -14,7 +14,7 @@ for aset in server_args:
                                                 aset[3]))
     idset = "_".join(ids)
     data = np.load("_results_{}.npy".format(idset))
-    
+
     vals = np.linspace(*aset[1:])
     ax = plt.subplot(111)
     ax.plot(vals, data, "o")
@@ -29,9 +29,8 @@ for aset in server_args:
         pars = mod.guess(y, x=x)
         out = mod.fit(y, pars, x=x)
         ax.plot(x, out.eval(params=out.params, x=x), "-")
-    except:
+    except BaseException:
         pass
-
 
     if np.nanmin(data) > .6 and np.nanmax(data) < .9:
         ax.set_ylim(.6, .9)
@@ -43,6 +42,3 @@ for aset in server_args:
     plt.tight_layout()
     plt.savefig("_plot_{}.png".format(idset), dpi=100)
     plt.close()
-    
-
-    

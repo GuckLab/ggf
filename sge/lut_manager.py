@@ -9,19 +9,20 @@ import ggf
 
 
 USERNAME = os.environ["USER"]
-#SERVER = "127.0.0.1"
+# SERVER = "127.0.0.1"
 SERVER = "guck-paulm-pc"
 AUTHKEY = "d10fj32"
 PORT = 42522
 
 try:
-    MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
+    MYIP = [(s.connect(('8.8.8.8', 80)), s.getsockname()[0], s.close())
+            for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
 except OSError:
     MYIP = "127.0.0.1"
 
 try:
     SERVERIP = socket.gethostbyname(SERVER)
-except:
+except BaseException:
     SERVERIP = "127.0.0.1"
 
 
@@ -37,30 +38,30 @@ def map_lut2geom(kwargs):
 
 class PM_Client(jm.JobManager_Client):
     def __init__(self):
-        super(PM_Client, self).__init__(server=SERVER, 
-                                        authkey=AUTHKEY, 
-                                        port=PORT, 
+        super(PM_Client, self).__init__(server=SERVER,
+                                        authkey=AUTHKEY,
+                                        port=PORT,
                                         nproc=1,
-                                        no_warnings=True, 
+                                        no_warnings=True,
                                         verbose=0)
 
     @staticmethod
     def func(args, const_arg):
         try:
             result = ggf.get_ggf(*args[2:], use_lut=False)
-        except:
+        except BaseException:
             result = np.nan
         return (MYIP, USERNAME, result)
 
 
 class PM_Server(jm.JobManager_Server):
     def __init__(self, server_args):
-        
+
         # setup init parameters for the ancestor class
         fname_dump = None
         verbose = 1
         msg_interval = 1
-        
+
         # init ancestor class
         super(PM_Server, self).__init__(authkey=AUTHKEY,
                                         port=PORT,
@@ -85,7 +86,8 @@ class PM_Server(jm.JobManager_Server):
                     for jj, ll in enumerate(labels):
                         kw[ll] = mesh[jj].flat[ii]
                     putargs = []
-                    # convert kwargs to ggf kwargs (stretch_ratio, relative_index)
+                    # convert kwargs to ggf kwargs
+                    # (stretch_ratio, relative_index)
                     kw_ggf = map_lut2geom(kw)
                     # convert kwargs to args
                     for kk in ggf.get_ggf.__code__.co_varnames:
@@ -121,7 +123,7 @@ class PM_Server(jm.JobManager_Server):
                     lut = np.nan * np.zeros(dims, dtype=float)
                     h5lut = h5.create_dataset("lut", data=lut)
                 else:
-                    h5lut = h5["lut"] 
+                    h5lut = h5["lut"]
                     lut = h5lut.value
                 h5lut.attrs["dimension_order"] = ",".join(labels)
                 for ll in labels:

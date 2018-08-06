@@ -7,6 +7,8 @@ import percache
 
 import ggf
 
+NUM_ERRS = 1000  # number of random error values to compute
+
 mycache = percache.Cache("lut_test.cache", livesync=True)
 
 
@@ -18,10 +20,10 @@ def compute_ggf(**kwargs):
 def get_kwarg_ranges(lut_path):
     with h5py.File(lut_path, mode="r") as h5:
         attrs = dict(h5["lut"].attrs)
-    
+
     fixed = {}
     ranges = {}
-    
+
     for kw in ["model", "stretch_ratio", "semi_minor", "relative_object_index",
                "medium_index", "effective_fiber_distance",
                "mode_field_diameter", "power_per_fiber",
@@ -31,7 +33,7 @@ def get_kwarg_ranges(lut_path):
         else:
             ranges[kw] = (attrs["{} min".format(kw)],
                           attrs["{} max".format(kw)])
-    
+
     return fixed, ranges
 
 
@@ -54,8 +56,9 @@ for path in paths:
     # make everything reproducible
     np.random.set_state(np.random.RandomState(42).get_state())
     fixed, ranges = get_kwarg_ranges(path)
+    errs = []
     # dice out a few parameters
-    for ii in range(100):
+    for ii in range(NUM_ERRS):
         kwargs = fixed.copy()
         for rr in ranges:
             kwargs[rr] = np.random.uniform(low=ranges[rr][0],
@@ -65,4 +68,7 @@ for path in paths:
         ggf1 = ggf.get_ggf(use_lut=path, **kw_ggf)
         # compute value (cached)
         ggf2 = compute_ggf(**kw_ggf)
-        print(path, "{:03d} error: {:.1f}%".format(ii, (ggf2-ggf1)/ggf2*100))
+        erri = (ggf2-ggf1)/ggf2
+        errs.append(erri)
+        print(path, "{:03d} error: {:.1f}%".format(ii, erri*100))
+        np.savetxt(path.with_suffix(".errors.txt"), errs)

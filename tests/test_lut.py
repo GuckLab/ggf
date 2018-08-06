@@ -41,7 +41,7 @@ def test_exact_fus():
                     poisson_ratio=.4,
                     n_poly=120,
                     use_lut=True)
-    exact =  1.23706977246589
+    exact = 1.23706977246589
     assert np.allclose(exact, f, rtol=0, atol=1e-10)
 
 

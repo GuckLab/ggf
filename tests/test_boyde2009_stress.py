@@ -55,7 +55,6 @@ def test_barton_davis_difference():
     assert np.allclose(sigmarr1, sigmarr2, rtol=0, atol=3e-4)
 
 
-
 if __name__ == "__main__":
     test_droplet()
     # Run all tests

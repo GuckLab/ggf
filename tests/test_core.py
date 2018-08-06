@@ -22,7 +22,7 @@ def test_stress2legendre():
     sigma_0 = 1.341
     theta = np.linspace(0, np.pi, 100, endpoint=True)
     stress = sigma_0 * (np.cos(theta))**2
-    
+
     coeff = stress2legendre(stress=stress, theta=theta, n_poly=10)
 
     # Only valid values for n=0 and n=2
@@ -40,7 +40,7 @@ def test_stress2ggf():
     stress = sigma_0 * (np.cos(theta))**2
     poisson_ratio = 0.45
     n_poly = 10
-    
+
     ggf = stress2ggf(stress=stress,
                      theta=theta,
                      poisson_ratio=poisson_ratio,
@@ -49,9 +49,9 @@ def test_stress2ggf():
     # analytical solution (see Ananthakrishnan 2006, Appendix)
     nu = poisson_ratio
     fg = 1 / (2*(1+nu)) \
-         * (1/3 * ((1-2*nu) + (4*nu-7)*(1+nu) / (5*nu+7)) \
-            + (-4*nu + 7)*(1+nu) / (5*nu + 7) * 1) 
-    
+        * (1/3 * ((1-2*nu) + (4*nu-7)*(1+nu) / (5*nu+7))
+           + (-4*nu + 7)*(1+nu) / (5*nu + 7) * 1)
+
     assert np.allclose(ggf, fg*sigma_0)
 
 

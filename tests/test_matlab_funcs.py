@@ -56,17 +56,16 @@ def test_legendre():
 
 def test_lscov():
     # https://de.mathworks.com/help/matlab/ref/lscov.html
-    x1 = np.array([.2, .5, .6, .8, 1.0, 1.1]) 
-    x2 = np.array([.1, .3, .4, .9, 1.1, 1.4]) 
+    x1 = np.array([.2, .5, .6, .8, 1.0, 1.1])
+    x2 = np.array([.1, .3, .4, .9, 1.1, 1.4])
     X = np.array([np.ones(x1.size), x1, x2]).T
     y = np.array([.17, .26, .28, .23, .27, .34])
 
-   
     w = np.ones_like(x1)
     req = matlab_funcs.lscov(X, y, w)
     ans = [0.1203, 0.3284, -0.1312]
     assert np.allclose(req, ans, rtol=0, atol=5e-5)
-    
+
     w2 = np.array([1, 1, 1, 1, 1, .1])
     req2 = matlab_funcs.lscov(X, y, w2)
     ans2 = [0.1046, 0.4614, -0.2621]
@@ -74,7 +73,7 @@ def test_lscov():
 
 
 def test_quadl():
-    myfunc = lambda x: 1./(x**3-2*x-5)
+    def myfunc(x): return 1./(x**3-2*x-5)
     Q = matlab_funcs.quadl(myfunc, 0, 2)
     assert np.allclose(Q, -0.4605, rtol=0, atol=5e-5)
 

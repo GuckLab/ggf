@@ -1,5 +1,3 @@
-import pathlib
-
 import numpy as np
 
 import ggf
@@ -36,7 +34,7 @@ def test_basic():
         power_left=power_per_fiber,
         power_right=power_per_fiber,
         n_points=n_points)
-    
+
     th2, sg2 = ggf.stress.get_stress(
         model="boyde2009",
         semi_major=semi_major,
@@ -67,12 +65,12 @@ def test_boundary():
     b1 = boyde2009.core.boundary(
         costheta=costheta,
         a=1,
-        epsilon=(semi_major - semi_minor) / semi_minor, 
+        epsilon=(semi_major - semi_minor) / semi_minor,
         nu=0)
     b2 = boyde2009.core.boundary(
         costheta=costheta,
         a=1,
-        epsilon=stretch_ratio, 
+        epsilon=stretch_ratio,
         nu=poisson_ratio)
 
     assert np.allclose(b1, b2)
