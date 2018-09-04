@@ -3,7 +3,7 @@
 Installation
 ============
 
-ggf is written in pure Python and supports Python version 3.5
+ggf is written in pure Python and supports Python version 3.6
 and higher.
 
 To install ggf, use one of the following methods

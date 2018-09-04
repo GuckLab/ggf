@@ -11,8 +11,8 @@ What is the package "ggf" used for?
 It is a Python implementation of two Matlab scripts by
 Lars Boyde, *StretcherNStress.m* and *GGF.m*, which are used in
 the Guck lab to compute optical stress distributions and resulting
-global geometric factors for spherical and spheroidal objects
-in the optical stretcher.
+global geometric factors for dielectric, elastic, and spheroidal
+objects in the optical stretcher.
 
 
 What is an optical stretcher?
@@ -22,7 +22,7 @@ configuration built from two opposing optical fibers :cite:`Guck2001`.
 When increasing the trapping power, compliant objects such as cells
 are stretched along the axis of the trap. Using video analysis, the
 measured shape change can be translated into physical properties of the
-cell.
+object.
 
 
 What is the global geometric factor?
@@ -31,15 +31,15 @@ The global geometric factor (GGF) connects (the unknown variable)
 compliance :math:`J` (how easy it is to deform a body consisting of a certain
 material) and (the measured variable) strain :math:`\epsilon` (how much this
 body is deformed). Thus, the GGF is a measure of stress (force acting on the
-surface of the body).
+surface of the object).
 
 .. math::
 
     J = \frac{\epsilon}{\text{GGF}}
 
 In an optical stretcher (OS) experiment, the strain :math:`\epsilon`
-of a cell can be measured by analyzing its deformation (e.g. via a
-contour in the intensity image). Using cell size and the measured
+of an object can be measured by analyzing its deformation (e.g. via a
+contour in the intensity image). Using object radius and the measured
 change in eccentricity, as well as several parameters of the OS
 setup itself, :mod:`ggf` can be used to compute the optical stress
 :math:`\sigma` from which the GGF is computed.

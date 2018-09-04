@@ -8,24 +8,22 @@ Concept and theory
 
 Summary
 =======
-The computation of the compliance :math:`J` for elastic spheres in the OS can be
-divided into three main tasks: measuring the deformation :math:`w`, 
-modeling the optical stress :math:`\sigma_r`, and computing the GGF from the stress.
+The computation of the compliance :math:`J` for dielectric, elastic,
+spheroidal objects in the OS can be divided into three main tasks:
+measuring the deformation :math:`w`, modeling the optical stress
+:math:`\sigma_r`, and computing the GGF from the stress.
 Several approaches to these problems have been presented in the
 related literature and are discussed in the following.
 
 
 Experimentally quantifying deformation
 ======================================
-
-Semimajor and -minor axes of an ellipse fit
--------------------------------------------
-todo
-
-
-Boundary function fitted to the contour
----------------------------------------
-tbd
+The deformation is quantified from video images by fitting an ellipse
+to the contour of the stretched object. The deformation can then be
+defined as a relation between the semimajor or semiminor axes and the
+initial radius (or semiaxes). Note that the prolate spheroidal shape
+is only an approximation to the actual shape. The methods in this package
+more or less assume that this approximation is valid.
 
 
 Optical stress profile acting on a prolate spheroid
@@ -39,7 +37,7 @@ pointing to the right hand fiber.
 
 :math:`\cos^2\theta` approximation
 ----------------------------------
-Ray optics is used to compute the optical stress acting on a prolate
+Ray optics is used to compute the optical stress acting on a
 spheroid and a :math:`\sigma_0 cos^2\theta` model is fitted to the
 resulting stress profile with the peak stress
 :math:`\sigma_0` :cite:`Guck2001`. The :math:`\sigma_0 cos^2\theta`
@@ -52,7 +50,6 @@ e.g. for different fibroblast cell lines :cite:`Ananthakrishnan2006`.
 
 Semi-analytical perturbation approach (Boyde et al. 2009)
 ---------------------------------------------------------
-
 - gaussian laser beam
 - :math:`a > \lambda`: higher order perturbation theory
 - :cite:`Boyde2009`
@@ -60,8 +57,11 @@ Semi-analytical perturbation approach (Boyde et al. 2009)
 
 Generalized Lorentz-Mie theory (Boyde et al. 2012)
 --------------------------------------------------
-tbd
-
+- gaussian laser beam
+- spheroidal coordinates
+- generalized Lorenz–Mie theory
+- not implemented (Matlab sources available upon request)
+- :cite:`Boyde2012`
 
 
 .. _sec_theory_ggf:
@@ -70,7 +70,8 @@ Computation of the GGF
 ======================
 The following derivations are based on the theoretical considerations
 of Lur'e :cite:`Lure1964` for a rotationally symmetric deformation of
-a sphere and their application to the OS by Ananthakrishnan
+a sphere (which in general does not result in prolate spheroids)
+and their application to the OS by Ananthakrishnan
 et al. :cite:`Ananthakrishnan2006`. Note that a corrigendum has been published
 for this article in 2008 :cite:`Ananthakrishnan2008Corr`.
 
@@ -147,7 +148,7 @@ The radial displacement then takes the form
 
 with the coefficients :math:`L_n` and :math:`M_n` given in 
 :cite:`Lure1964`, chapter 6.6.
-We measure the displacement at the outer perimeter of the stretched object
+We measure the displacement at the outer perimeter of the stretched sphere
 and on the stretcher axis only; Thus, we set :math:`r=r_0` and
 :math:`\theta=0` with :math:`w=u_r(r_0, 0)`.
 
@@ -228,4 +229,5 @@ With :math:`J = 1/G`, it computes to
     J(t) = \frac{w(t)}{r_0} \cdot \frac{1}{\text{GGF}(t)}. 
 
 Note that the GGF is now time-dependent, because the optical stress
-profile :math:`\sigma_r`, from which the GGF is computed, also depends on the deformation. 
+profile :math:`\sigma_r`, from which the GGF is computed, also depends
+on the deformation. 
