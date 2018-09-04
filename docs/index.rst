@@ -4,7 +4,7 @@ ggf documentation
 =================
 
 ggf is a Python library for computing global geometric factors and
-corresponding stresses acting on a dielectric, elastic, spheroidal
+corresponding stresses acting on dielectric, elastic, spheroidal
 objects in the optical stretcher. This is the documentation of ggf
 version |release|.
 
