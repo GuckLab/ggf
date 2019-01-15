@@ -33,9 +33,9 @@ Testing
     python setup.py test
     
 
-.. |PyPI Version| image:: http://img.shields.io/pypi/v/ggf.svg
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/ggf.svg
    :target: https://pypi.python.org/pypi/ggf
-.. |Tests Status Linux| image:: http://img.shields.io/travis/GuckLab/ggf.svg?label=tests_linux
+.. |Tests Status Linux| image:: https://img.shields.io/travis/GuckLab/ggf.svg?label=tests_linux
    :target: https://travis-ci.org/GuckLab/ggf
 .. |Coverage Status| image:: https://img.shields.io/codecov/c/github/GuckLab/ggf/master.svg
    :target: https://codecov.io/gh/GuckLab/ggf
