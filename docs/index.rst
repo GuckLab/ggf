@@ -15,6 +15,7 @@ version |release|.
    sec_installation
    sec_introduction
    sec_concept_theory
+   sec_issues
    sec_examples
    sec_code_reference
    sec_changelog
