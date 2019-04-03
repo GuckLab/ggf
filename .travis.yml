@@ -3,10 +3,7 @@ python:
 - '3.6'
 notifications:
   email: false
-env:
-  matrix:
-  - TEST="PYTEST"
-#  - TEST="FLAKE8"
+
 install:
 - travis_retry pip install .
 # coverage packages
@@ -15,12 +12,9 @@ install:
 - pip freeze
 script:
 - set -ev
-- if [ "${TEST}" == "PYTEST" ]; then
-       travis_wait 30 coverage run --source=ggf setup.py test;
-       coverage report -m;
-       codecov;
-  else
-       flake8 drymass;
-       flake8 examples;
-       flake8 tests;
-  fi;
+- travis_wait 30 coverage run --source=ggf setup.py test
+- coverage report -m
+- codecov
+- flake8 drymass
+- flake8 examples
+- flake8 tests
