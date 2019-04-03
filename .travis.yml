@@ -15,6 +15,6 @@ script:
 - travis_wait 30 coverage run --source=ggf setup.py test
 - coverage report -m
 - codecov
-- flake8 drymass
+- flake8 ggf
 - flake8 examples
 - flake8 tests

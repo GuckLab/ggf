@@ -1,4 +1,4 @@
-"""Object boundary: stretching and Poisson's ratio
+r"""Object boundary: stretching and Poisson's ratio
 
 This example illustrates how the parameters Poisson's ratio
 :math:`\nu` and stretch ratio :math:`\epsilon` influence
