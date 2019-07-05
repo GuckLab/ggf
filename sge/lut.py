@@ -1,3 +1,4 @@
+"""LUT computation on a distributed system"""
 import sys
 
 from lut_manager import PM_Client, PM_Server

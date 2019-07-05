@@ -1,7 +1,7 @@
 0.4.0
  - fix: reproduce stretch ratio warning when using LUT
  - enh: updated LUT for FUS droplets
- - enh: update sge/distributed computation of LUT scripts
+ - enh: update sge/distributed computation with LUT scripts
 0.3.4
  - maintenance release
 0.3.3
