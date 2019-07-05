@@ -2,7 +2,7 @@
 
 Convert to float32 and use gzip compression.
 
-Usage: python shrink_lut path/to/lut.h5 
+Usage: python shrink_lut path/to/lut.h5
 """
 import sys
 
