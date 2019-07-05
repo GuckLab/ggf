@@ -25,5 +25,4 @@
 #now we can run our command here. In this example we run the mpi test programm mpi-ring
 
 module load apps/python3/3.6.4
-source ~/CLUSTER/ggf/.env/bin/activate
-python ~/CLUSTER/ggf/sge/scan.py client
+~/CLUSTER/ggf/.env/bin/python ~/CLUSTER/ggf/sge/scan.py client
