@@ -4,7 +4,6 @@ import pytest
 import ggf
 
 
-@pytest.mark.xfail
 def test_exact_cell():
     """Test the exact value on a LUT grid point"""
     stretch_ratio = 0.065
@@ -23,7 +22,7 @@ def test_exact_cell():
                     n_poly=120,
                     use_lut=True)
     exact = 0.7711334992513761
-    assert np.allclose(exact, f, rtol=0, atol=1e-10)
+    assert np.allclose(exact, f, rtol=0, atol=1e-7)
 
 
 @pytest.mark.xfail

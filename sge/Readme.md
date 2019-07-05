@@ -23,3 +23,7 @@ plot_scan.py
 ------------
 Visualization of line scans (to get an idea about the necessary
 spacing in `lut.py`.
+
+compress_lut.py
+---------------
+Compress computed LUTs for smaller distribution sizes.
