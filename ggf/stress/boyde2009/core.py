@@ -167,8 +167,7 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
         mmax = 3
     else:
         if (epsilon > 0.15):
-            warnings.warn(
-                'Warning, cell stretching ratio is high: {}'.format(epsilon))
+            warnings.warn('Stretching ratio is high: {}'.format(epsilon))
         # spheroidal object, point-matching required (mmax has to be divisible
         # by 3)
         mmax = 6 * lmax

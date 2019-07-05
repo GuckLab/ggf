@@ -10,7 +10,7 @@ import ggf
 
 USERNAME = os.environ["USER"]
 # SERVER = "127.0.0.1"
-SERVER = "guck-paulm-pc"
+SERVER = "192.168.129.31"  # login biocluster
 AUTHKEY = "d10fj32"
 PORT = 42522
 

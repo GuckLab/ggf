@@ -24,4 +24,6 @@
 #$ -l h_rt=5:00:00
 #now we can run our command here. In this example we run the mpi test programm mpi-ring
 
-${HOME}/CLUSTER/anaconda3/bin/python  ~/CLUSTER/ggf/sge/scan.py client
+module load apps/python3/3.6.4
+source ~/CLUSTER/ggf/.env/bin/activate
+python ~/CLUSTER/ggf/sge/scan.py client

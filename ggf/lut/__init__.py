@@ -1,6 +1,7 @@
 """Look-up table for GGF computation"""
 import pathlib
 from pkg_resources import resource_filename
+import warnings
 
 import h5py
 import numpy as np
@@ -175,6 +176,10 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     stretch_ratio = (semi_major - semi_minor) / semi_minor
     # normalize object index with medium_index
     relative_object_index = object_index / medium_index
+    # reproduce warning in boyde2009.core
+    if model == "boyde2009" and stretch_ratio > 0.15:
+        warnings.warn('Stretching ratio is high: {}'.format(stretch_ratio))
+
     # determine the correct LUT
     kwargs = {"model": model,
               "stretch_ratio": stretch_ratio,
