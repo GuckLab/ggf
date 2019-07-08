@@ -102,7 +102,7 @@ class PM_Server(jm.JobManager_Server):
         fn = self.get_h5_filename(lut_name)
         if os.path.exists(fn) and lut_set is None:
             with h5py.File(fn, mode="r") as h5:
-                data = h5["lut"].value
+                data = h5["lut"][:]
         else:
             assert lut_set is not None, "First call must include 'lut_set'"
             labels = [ll for ll in lut_set if isinstance(lut_set[ll], list)]
@@ -124,7 +124,7 @@ class PM_Server(jm.JobManager_Server):
                     h5lut = h5.create_dataset("lut", data=lut)
                 else:
                     h5lut = h5["lut"]
-                    lut = h5lut.value
+                    lut = h5lut[:]
                 h5lut.attrs["dimension_order"] = ",".join(labels)
                 for ll in labels:
                     h5lut.attrs["{} min".format(ll)] = lut_set[ll][0]
@@ -138,7 +138,7 @@ class PM_Server(jm.JobManager_Server):
     def save_to_output_h5(self, lut_name, coord, value):
         fn = self.get_h5_filename(lut_name)
         with h5py.File(fn, mode="a") as h5:
-            lut = h5["lut"].value
+            lut = h5["lut"][:]
             lut.flat[coord] = value
             h5["lut"][:] = lut
 

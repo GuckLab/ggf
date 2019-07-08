@@ -176,10 +176,6 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     stretch_ratio = (semi_major - semi_minor) / semi_minor
     # normalize object index with medium_index
     relative_object_index = object_index / medium_index
-    # reproduce warning in boyde2009.core
-    if model == "boyde2009" and stretch_ratio > 0.15:
-        warnings.warn('Stretching ratio is high: {}'.format(stretch_ratio))
-
     # determine the correct LUT
     kwargs = {"model": model,
               "stretch_ratio": stretch_ratio,
@@ -193,12 +189,15 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
               "poisson_ratio": poisson_ratio,
               "n_poly": n_poly}
     # get the right LUT
-    lut_path = _match_lut(kwargs, lut_path)
+    lut_path = _match_lut(kwargs, lut_path)  # raises NotInLutError
     if verbose:
         print("Using LUT path: {}".format(lut_path))
+    # reproduce warning in boyde2009.core
+    if model == "boyde2009" and stretch_ratio > 0.15:
+        warnings.warn('Stretching ratio is high: {}'.format(stretch_ratio))
     # get LUT data
     with h5py.File(lut_path, mode="r") as h5:
-        values = h5["lut"].value
+        values = h5["lut"][:]
         meta = dict(h5["lut"].attrs)
     # order of interpolation dimensions
     order = meta["dimension_order"].split(",")

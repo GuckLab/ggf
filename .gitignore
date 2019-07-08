@@ -110,3 +110,5 @@ docs/ggf.bib.sav
 sge/*.png
 sge/*.npy
 sge/*.h5
+sge/lut_test.cache
+sge/*.errors.txt

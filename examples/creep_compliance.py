@@ -47,9 +47,9 @@ def ellipse_fit(radius, theta):
 
 # load the contour data (stored in polar coordinates)
 with h5py.File("data/creep_compliance_data.h5", "r") as h5:
-    radius = h5["radius"].value * 1e-6  # [µm] to [m]
-    theta = h5["theta"].value
-    time = h5["time"].value
+    radius = h5["radius"][:] * 1e-6  # [µm] to [m]
+    theta = h5["theta"][:]
+    time = h5["time"][:]
     meta = dict(h5.attrs)
 
 
