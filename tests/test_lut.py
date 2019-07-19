@@ -33,33 +33,16 @@ def test_exact_fus():
                     semi_minor=2.5e-6,
                     object_index=1.340*1.009,
                     medium_index=1.340,
-                    effective_fiber_distance=170e-6,
+                    effective_fiber_distance=175e-6,
                     mode_field_diameter=4.8e-6,
-                    power_per_fiber=.65,
+                    power_per_fiber=.5,
                     wavelength=780e-9,
                     poisson_ratio=.4,
                     n_poly=120,
                     use_lut=True)
-    exact = 1.23706977246589
-    assert np.allclose(exact, f, rtol=0, atol=1e-10)
-
-
-@pytest.mark.xfail
-def test_basic_fus_semi_major():
-    f = ggf.get_ggf(model="boyde2009",
-                    semi_major=2.8e-6*1.0018181818181818182,
-                    semi_minor=2.8e-6,
-                    object_index=1.340*1.045,
-                    medium_index=1.340,
-                    effective_fiber_distance=170e-6,
-                    mode_field_diameter=4.8e-6,
-                    power_per_fiber=.65,
-                    wavelength=780e-9,
-                    poisson_ratio=.4,
-                    n_poly=None,
-                    use_lut=True)
-    exact = 1.237550828156066
-    assert np.allclose(exact, f, rtol=0, atol=1e-5)
+    exact = 0.7878645380697753
+    # upon compression this becomes: 0.78786457
+    assert np.allclose(exact, f, rtol=0, atol=1e-7)
 
 
 if __name__ == "__main__":
