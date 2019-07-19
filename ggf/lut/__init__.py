@@ -210,6 +210,12 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     # interpolation coordinates
     xi = [kwargs[kk] for kk in order]
     # perform interpolation
-    ggf = interpn(points=points, values=values, xi=xi, method="linear",
+    ggfval = interpn(points=points, values=values, xi=xi, method="linear",
                   bounds_error=True)
-    return np.asscalar(ggf)
+    ggfval = np.asscalar(ggfval)
+    if np.isnan(ggfval):
+        raise ValueError("The value to be estimated in the LUT is `nan`. "
+                         + "Either the LUT is incomplete or the specified "
+                         + "model '{}' cannot handle ".format(model)
+                         + "the given input parameters.")
+    return ggfval

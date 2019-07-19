@@ -19,7 +19,7 @@ luts = {
          "semi_minor": [2.5e-6, 8.5e-6, 17],
          "relative_object_index": [1.009, 1.042, 23],
          "medium_index": [1.340, 1.347, 3],
-         "effective_fiber_distance": [175e-6, 215-6, 2],
+         "effective_fiber_distance": [175e-6, 215e-6, 2],
          "mode_field_diameter": 4.8e-6,
          "power_per_fiber": [.5, .7, 2],
          "wavelength": 780e-9,

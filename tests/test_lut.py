@@ -29,9 +29,9 @@ def test_exact_cell():
 def test_exact_fus():
     """Test the exact value on a LUT grid point"""
     f = ggf.get_ggf(model="boyde2009",
-                    semi_major=2.8e-6,
-                    semi_minor=2.8e-6,
-                    object_index=1.340*1.045,
+                    semi_major=2.5e-6,
+                    semi_minor=2.5e-6,
+                    object_index=1.340*1.009,
                     medium_index=1.340,
                     effective_fiber_distance=170e-6,
                     mode_field_diameter=4.8e-6,
