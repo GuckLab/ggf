@@ -210,5 +210,6 @@ def get_ggf_lut(model, semi_major, semi_minor, object_index, medium_index,
     # interpolation coordinates
     xi = [kwargs[kk] for kk in order]
     # perform interpolation
-    ggf = interpn(points=points, values=values, xi=xi)
+    ggf = interpn(points=points, values=values, xi=xi, method="linear",
+                  bounds_error=True)
     return np.asscalar(ggf)
