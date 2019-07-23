@@ -1,5 +1,6 @@
+import warnings
+
 import numpy as np
-import pytest
 
 import ggf
 
@@ -42,6 +43,24 @@ def test_exact_fus():
     exact = 0.8069195712307504
     # upon compression this becomes: 0.8069195747375488
     assert np.allclose(exact, f, rtol=0, atol=4e-9)
+
+
+def test_lut_stretch_warning():
+    with warnings.catch_warnings(record=True) as w:
+        ggf.get_ggf(model="boyde2009",
+                    semi_major=3.6e-6,
+                    semi_minor=3e-6,
+                    object_index=1.344*1.0178,
+                    medium_index=1.344,
+                    effective_fiber_distance=175e-6,
+                    mode_field_diameter=4.8e-6,
+                    power_per_fiber=.5,
+                    wavelength=780e-9,
+                    poisson_ratio=.4,
+                    n_poly=120,
+                    use_lut=True)
+        assert len(w) == 1
+        assert "Stretching ratio is high: 0.199" in str(w[0].message)
 
 
 if __name__ == "__main__":
