@@ -3,6 +3,8 @@
 Convert to float32 and use gzip compression.
 
 Usage: python shrink_lut path/to/lut.h5
+
+A new file path/to/lut_compressed.h5 will be created.
 """
 import sys
 

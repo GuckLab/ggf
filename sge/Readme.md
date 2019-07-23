@@ -22,7 +22,7 @@ Distributed computation of 1D line-scans defined in `scan.py`.
 plot_scan.py
 ------------
 Visualization of line scans (to get an idea about the necessary
-spacing in `lut.py`.
+spacing in `lut.py`).
 
 compress_lut.py
 ---------------

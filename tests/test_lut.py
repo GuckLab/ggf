@@ -25,14 +25,13 @@ def test_exact_cell():
     assert np.allclose(exact, f, rtol=0, atol=1e-7)
 
 
-@pytest.mark.xfail
 def test_exact_fus():
     """Test the exact value on a LUT grid point"""
     f = ggf.get_ggf(model="boyde2009",
-                    semi_major=2.5e-6,
-                    semi_minor=2.5e-6,
-                    object_index=1.340*1.009,
-                    medium_index=1.340,
+                    semi_major=3e-6,
+                    semi_minor=3e-6,
+                    object_index=1.344*1.0178,
+                    medium_index=1.344,
                     effective_fiber_distance=175e-6,
                     mode_field_diameter=4.8e-6,
                     power_per_fiber=.5,
@@ -40,9 +39,9 @@ def test_exact_fus():
                     poisson_ratio=.4,
                     n_poly=120,
                     use_lut=True)
-    exact = 0.7878645380697753
-    # upon compression this becomes: 0.78786457
-    assert np.allclose(exact, f, rtol=0, atol=1e-7)
+    exact = 0.8069195712307504
+    # upon compression this becomes: 0.8069195747375488
+    assert np.allclose(exact, f, rtol=0, atol=4e-9)
 
 
 if __name__ == "__main__":
