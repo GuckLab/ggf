@@ -1,5 +1,5 @@
 0.4.1
- - ref: do not use np.matrix
+ - ref: do not use np.matrix and np.asscalar
 0.4.0
  - fix: reproduce stretch ratio warning when using LUT
  - enh: updated LUT computation for FUS droplets
