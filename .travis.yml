@@ -11,7 +11,7 @@ install:
 - travis_retry pip install codecov coverage
 - pip freeze
 script:
-- travis_wait 30 coverage run --source=ggf setup.py test
+- travis_wait 30 coverage run -m pytest --source=ggf -s tests
 - coverage report -m
 - codecov
 - flake8 ggf
