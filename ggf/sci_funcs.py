@@ -4,7 +4,7 @@ import numpy as np
 from .matlab_funcs import legendre
 
 
-def legendrePlm(m, l, x):
+def legendrePlm(m, l, x):  # noqa:  E741
     a = np.concatenate((np.atleast_1d(np.zeros(m)),
                         np.atleast_1d(np.array(1)),
                         np.atleast_1d(np.zeros(l - m))))
