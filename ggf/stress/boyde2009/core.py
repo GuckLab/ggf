@@ -856,8 +856,8 @@ def stress(object_index=1.41, medium_index=1.3465, poisson_ratio=0.45,
 
     # Weights were commented out?:
     # xL = lscov (Matrix,VectorL.',Weight.').'
-    xL = lscov(np.matrix(Matrix), np.matrix(VectorL).T, np.matrix(Weight).T)
-    xR = lscov(np.matrix(Matrix), np.matrix(VectorR).T, np.matrix(Weight).T)
+    xL = lscov(np.array(Matrix), np.array(VectorL).T, np.array(Weight).T)
+    xR = lscov(np.array(Matrix), np.array(VectorR).T, np.array(Weight).T)
 
     if verbose:
         print('If Eps=0, ignore previous error messages regarding rank deficiency!')
