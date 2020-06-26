@@ -36,7 +36,7 @@ Testing
 .. |PyPI Version| image:: https://img.shields.io/pypi/v/ggf.svg
    :target: https://pypi.python.org/pypi/ggf
 .. |Tests Status Linux| image:: https://img.shields.io/travis/GuckLab/ggf.svg?label=tests_linux
-   :target: https://travis-ci.org/GuckLab/ggf
+   :target: https://travis-ci.com/GuckLab/ggf
 .. |Coverage Status| image:: https://img.shields.io/codecov/c/github/GuckLab/ggf/master.svg
    :target: https://codecov.io/gh/GuckLab/ggf
 .. |Docs Status| image:: https://readthedocs.org/projects/ggf/badge/?version=latest
