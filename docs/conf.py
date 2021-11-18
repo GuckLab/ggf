@@ -67,6 +67,9 @@ extensions = ['sphinx.ext.autodoc',
               'github_changelog',
               ]
 
+# specify bibtex files (required for sphinxcontrib.bibtex>=2.0)
+bibtex_bibfiles = ['ggf.bib']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
